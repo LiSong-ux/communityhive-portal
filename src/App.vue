@@ -2,7 +2,9 @@
     <div id="app" class="app">
         <div class="nav">
             <di class="logo">
-                <h2>啊哈哈哈哈哈啊</h2>
+                <router-link to="/">
+                    <h2>啊哈哈哈哈哈啊</h2>
+                </router-link>
             </di>
             <div class="func_zone">
                 <Menu class="menu" mode="horizontal" :theme="theme" active-name="1">
@@ -64,13 +66,13 @@
     }
     .nav {
         width: 100%;
-        height: 60px;
+        height: 50px;
         background-color: #515a6e;
     }
     .logo {
         float: left;
         color: #fff;
-        margin-top: 13px;
+        margin-top: 9px;
         margin-left: 40px;
     }
     .func_zone {
@@ -80,18 +82,23 @@
     .menu {
         float: left;
     }
+    .nav /deep/ .ivu-menu-horizontal {
+        height: 0;
+        line-height: 0;
+        margin-top: 19px;
+    }
     .login_register {
         float: right;
         margin-right: 5%;
         width: 10%;
-        height: 60px;
+        height: 50px;
     }
     .login {
         float: left;
-        margin-top: 13px;
+        margin-top: 9px;
     }
     .register {
         float: right;
-        margin-top: 13px;
+        margin-top: 9px;
     }
 </style>
