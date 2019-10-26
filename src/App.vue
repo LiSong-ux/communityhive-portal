@@ -47,6 +47,7 @@
             </div>
         </div>
         <div class="main" :style="{ minHeight: minHeight + 'px' }">
+            <img class="top_img" src="./assets/images/topImg.jpg"/>
             <router-view/>
         </div>
         <div class="footer">
@@ -77,7 +78,7 @@
 
 <style lang="scss">
     .app {
-        text-align: center;
+        background-color: #f1f2f3;
     }
     .header {
         width: 100%;
@@ -116,6 +117,18 @@
         float: right;
         margin-top: 9px;
     }
+
+
+    .main {
+        width: 1200px;
+        margin: 0 auto;
+        padding-top: 15px;
+    }
+    .top_img {
+        margin-bottom: 10px;
+    }
+
+
     .footer {
         width: 100%;
         height: 120px;
