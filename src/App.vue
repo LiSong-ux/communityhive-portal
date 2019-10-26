@@ -1,12 +1,12 @@
 <template>
     <div id="app" class="app">
-        <div class="nav">
+        <div class="header">
             <di class="logo">
                 <router-link to="/">
                     <h2>啊哈哈哈哈哈啊</h2>
                 </router-link>
             </di>
-            <div class="func_zone">
+            <div class="nav">
                 <Menu class="menu" mode="horizontal" :theme="theme" active-name="1">
                     <MenuItem name="1">
                         <Icon type="ios-paper"/>
@@ -46,7 +46,18 @@
                 </div>
             </div>
         </div>
-        <router-view/>
+        <div class="main" :style="{ minHeight: minHeight + 'px' }">
+            <router-view/>
+        </div>
+        <div class="footer">
+            <div class="about">
+                <router-link to="/">网站介绍</router-link> |
+                <router-link to="/">联系方式</router-link> |
+                <router-link to="/">帮助与反馈</router-link> |
+                <router-link to="/">侵权与投诉</router-link>
+            </div>
+            <div class="website">Copyright © 2019 啊哈哈哈哈哈啊</div>
+        </div>
     </div>
 </template>
 
@@ -54,8 +65,12 @@
     export default {
         data() {
             return {
-                theme: 'dark'
+                theme: 'dark',
+                minHeight: null,
             }
+        },
+        mounted() {
+            this.minHeight = document.documentElement.clientHeight - 170;
         }
     }
 </script>
@@ -64,7 +79,7 @@
     .app {
         text-align: center;
     }
-    .nav {
+    .header {
         width: 100%;
         height: 50px;
         background-color: #515a6e;
@@ -75,7 +90,7 @@
         margin-top: 9px;
         margin-left: 40px;
     }
-    .func_zone {
+    .nav {
         float: right;
         width: 85%;
     }
@@ -100,5 +115,19 @@
     .register {
         float: right;
         margin-top: 9px;
+    }
+    .footer {
+        width: 100%;
+        height: 120px;
+        color: #fff;
+        padding-top: 30px;
+        text-align: center;
+        background-color: #515a6e;
+    }
+    .about a {
+        color: #fff;
+    }
+    .website {
+        margin-top: 15px;
     }
 </style>
