@@ -122,7 +122,7 @@
     .main {
         width: 1200px;
         margin: 0 auto;
-        padding-top: 15px;
+        padding: 20px 0px;
     }
     .top_img {
         margin-bottom: 10px;
