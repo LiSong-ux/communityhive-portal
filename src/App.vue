@@ -7,16 +7,16 @@
                 </router-link>
             </div>
             <div class="nav">
-                <Menu class="menu" mode="horizontal" :theme="theme" active-name="1">
+                <Menu class="menu" mode="horizontal" :theme="theme" :active-name="selected">
                     <MenuItem name="1">
                         <Icon type="md-home" size="18"/>
                         <span>首页</span>
                     </MenuItem>
-                    <!--<MenuItem name="2">
-                        <Icon type="ios-people"/>
-                        用户管理
+                    <MenuItem name="2">
+                        <Icon type="ios-create" ize="18"/>
+                        <span>发表帖子</span>
                     </MenuItem>
-                    <Submenu name="3">
+                    <!-- <Submenu name="3">
                         <template slot="title">
                             <Icon type="ios-stats"/>
                             统计分析
@@ -68,6 +68,7 @@
             return {
                 theme: 'dark',
                 minHeight: null,
+                selected: 1,
             }
         },
         mounted() {
@@ -111,13 +112,13 @@
         }
     }
     .nav /deep/ .ivu-menu-horizontal {
-        height: 0;
-        line-height: 0;
-        margin-top: 19px;
+        height: 50px;
+        line-height: 50px;
     }
+
     .login_register {
-        float: right;
-        margin-right: 5%;
+        float: left;
+        margin-left: 70%;
         width: 130px;
         height: 50px;
     }
