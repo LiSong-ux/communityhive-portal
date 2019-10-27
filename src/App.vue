@@ -41,7 +41,7 @@
                         <Button type="success" ghost @click="toLogin">登录</Button>
                     </div>
                     <div class="register">
-                        <Button type="warning" ghost>注册</Button>
+                        <Button type="warning" ghost @click="toRegister">注册</Button>
                     </div>
                 </div>
             </div>
@@ -74,9 +74,12 @@
             this.minHeight = document.documentElement.clientHeight - 170;
         },
         methods: {
-            toLogin: function () {
+            toLogin () {
                 this.$router.push('/toLogin');
-            }
+            },
+            toRegister () {
+                this.$router.push('/toRegister');
+            },
         }
     }
 </script>

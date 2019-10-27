@@ -1,14 +1,18 @@
 <template>
-    <div class="login">
-        <div class="form_container">
-            <!--<Form class="form" :model="form" label-position="right" :label-width="100">
+    <div class="main">
+        <div class="container">
+            <div class="container_head">登录</div>
+            <Form class="container_form" :model="form" label-position="top">
                 <FormItem label="用户名">
                     <Input v-model="form.username"/>
                 </FormItem>
                 <FormItem label="密码">
                     <Input v-model="form.password"/>
                 </FormItem>
-            </Form>-->
+                <FormItem>
+                    <Button type="primary">登录</Button>
+                </FormItem>
+            </Form>
         </div>
     </div>
 </template>
@@ -26,13 +30,31 @@
     }
 </script>
 
-<style scoped>
-    .login {
+<style scoped lang="scss">
+    .main {
         width: 100%;
-        height: 800px;
         padding: 10px;
-        /*background-color: #7ab482;*/
-        border: 2px solid #999;
+        background-color: #dcdee2;
+        /*border: 2px solid #999;*/
     }
-
+    .container {
+        width: 40%;
+        height: 350px;
+        padding-top: 30px;
+        margin: 22px auto;
+        border-radius: 10px;
+        background-color: #f8f8f9;
+    }
+    .container_head {
+        font-size: 2.0em;
+        font-weight: bold;
+        text-align: center;
+    }
+    .container_form {
+        width: 80%;
+        margin: 30px auto;
+        Button {
+            width: 100%;
+        }
+    }
 </style>
