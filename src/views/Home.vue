@@ -199,8 +199,8 @@
     .home {
         width: 100%;
         padding: 0px 20px;
-        /*border: 1px solid lawngreen;*/
-        border: 2px solid #999;
+        border-radius: 10px;
+        background-color: #fff;
     }
     .table {
         width: 100%;

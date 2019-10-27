@@ -4,6 +4,7 @@ import Home from '../views/Home'
 import Login from '../views/Login'
 import Register from '../views/Register'
 import SubmitTopic from '../views/SubmitTopic'
+import Topic from '../views/Topic'
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,10 @@ const routes = [
   {
     path: '/toSubmitTopic',
     component: SubmitTopic
+  },
+  {
+    path: '/toTopic',
+    component: Topic
   },
   {
     path: '/about',
