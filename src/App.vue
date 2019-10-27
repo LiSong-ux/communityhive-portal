@@ -1,18 +1,18 @@
 <template>
     <div id="app" class="app">
         <div class="header">
-            <di class="logo">
+            <div class="logo">
                 <router-link to="/">
                     <h2>啊哈哈哈哈哈啊</h2>
                 </router-link>
-            </di>
+            </div>
             <div class="nav">
                 <Menu class="menu" mode="horizontal" :theme="theme" active-name="1">
                     <MenuItem name="1">
-                        <Icon type="ios-paper"/>
-                        内容管理
+                        <Icon type="md-home" size="18"/>
+                        <span>首页</span>
                     </MenuItem>
-                    <MenuItem name="2">
+                    <!--<MenuItem name="2">
                         <Icon type="ios-people"/>
                         用户管理
                     </MenuItem>
@@ -34,11 +34,11 @@
                     <MenuItem name="4">
                         <Icon type="ios-construct"/>
                         综合设置
-                    </MenuItem>
+                    </MenuItem>-->
                 </Menu>
                 <div class="login_register">
                     <div class="login">
-                        <Button type="success" ghost>登录</Button>
+                        <Button type="success" ghost @click="toLogin">登录</Button>
                     </div>
                     <div class="register">
                         <Button type="warning" ghost>注册</Button>
@@ -72,6 +72,11 @@
         },
         mounted() {
             this.minHeight = document.documentElement.clientHeight - 170;
+        },
+        methods: {
+            toLogin: function () {
+                this.$router.push('/toLogin');
+            }
         }
     }
 </script>
@@ -89,7 +94,7 @@
         float: left;
         color: #fff;
         margin-top: 9px;
-        margin-left: 40px;
+        margin-left: 100px;
     }
     .nav {
         float: right;
@@ -97,6 +102,10 @@
     }
     .menu {
         float: left;
+        left: 45px;
+        span {
+            font-size: 1.2em;
+        }
     }
     .nav /deep/ .ivu-menu-horizontal {
         height: 0;
@@ -106,7 +115,7 @@
     .login_register {
         float: right;
         margin-right: 5%;
-        width: 10%;
+        width: 130px;
         height: 50px;
     }
     .login {

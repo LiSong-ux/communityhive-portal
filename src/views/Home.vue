@@ -1,6 +1,14 @@
 <template>
     <div class="home">
         <table class="table">
+            <tr class="tr_head border_bottom">
+                <th class="th_title" align="left">
+                    <div class="title_box">全部主题</div>
+                </th>
+                <th align="center">作者</th>
+                <th align="center">回复 / 查看</th>
+                <th align="center">最后发表</th>
+            </tr>
             <tr class="tr_topic" v-for="(topic, index) in topics" :key="index">
                 <td :class="index==topics.length-1?'title':'title border_bottom'">
                     {{ topic.title }}
@@ -10,7 +18,8 @@
                     <p>{{ topic.submit }}</p>
                 </td>
                 <td :class="index==topics.length-1?'reply_view':'reply_view border_bottom'">
-                    {{ topic.replyNum }}/{{ topic.viewNum }}
+                    <h3>{{ topic.replyNum }}</h3>
+                    <p>{{ topic.viewNum }}</p>
                 </td>
                 <td :class="index==topics.length-1?'latestReply':'latestReply border_bottom'">
                     <h3>{{ topic.latestReply }}</h3>
@@ -190,19 +199,32 @@
     .home {
         width: 100%;
         padding: 0px 20px;
-        border: 1px solid lawngreen;
+        /*border: 1px solid lawngreen;*/
+        border: 2px solid #999;
     }
     .table {
         width: 100%;
         border-collapse:collapse;
     }
+    .tr_head {
+        height: 40px;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+    /*.th_title {
+        border-left: 6px solid dodgerblue;
+    }*/
+    .title_box {
+        padding-left: 15px;
+        border-left: 6px solid dodgerblue;
+    }
+    .tr_topic {
+        height: 60px;
+    }
     .title {
         width: 60%;
         font-size: 1.2em;
         font-weight: bold;
-    }
-    .tr_topic {
-        height: 60px;
     }
     .author {
         text-align: center;
@@ -216,8 +238,13 @@
     .reply_view {
         text-align: center;
         width: 8%;
-        font-size: 1.2em;
-        color: cadetblue;
+        font-size: 1.1em;
+        h3 {
+            color: cadetblue;
+        }
+        p {
+            color: steelblue;
+        }
     }
     .latestReply {
         text-align: center;
@@ -230,6 +257,6 @@
     }
 
     .border_bottom {
-        border-bottom:1px solid lawngreen;
+        border-bottom:1px solid #999;
     }
 </style>
