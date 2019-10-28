@@ -11,7 +11,7 @@
             </tr>
             <tr class="tr_topic" v-for="(topic, index) in topics" :key="index">
                 <td :class="index==topics.length-1?'title':'title border_bottom'">
-                    {{ topic.title }}
+                    <router-link to="/toTopic">{{ topic.title }}</router-link>
                 </td>
                 <td :class="index==topics.length-1?'author':'author border_bottom'">
                     <h3>{{ topic.author }}</h3>
@@ -225,6 +225,12 @@
         width: 60%;
         font-size: 1.2em;
         font-weight: bold;
+        a {
+            color: #515a6e;
+        }
+        a:hover {
+            color: #2d8cf0;
+        }
     }
     .author {
         text-align: center;
