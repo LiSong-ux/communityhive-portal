@@ -22,6 +22,18 @@
                     <div class="floor">{{ index+1 }}楼</div>
                 </div>
                 <div class="reply_content">
+                    <div class="reply_quote">
+                        <div class="quote_icon_e">
+                            <div class="reply_quote_head">
+                                <span class="reply_quote_info">画航听雨眠 发表于 2019-10-22 21:32:19</span>
+                                <span class="reply_quote_floor">5楼</span>
+                            </div>
+                            <span>
+                                首先非常理解那些对角色抱有“一辈子只和这一个人在一起” 想法的读者姑娘们。
+                                当然我也觉得攻受是不是第一次完全不需要care
+                            </span>
+                        </div>
+                    </div>
                     {{ reply.content }}
                 </div>
             </div>
@@ -43,31 +55,6 @@
         data() {
             return {
                 replyList: [
-                    {
-                        author: '天空之母',
-                        submitTime: '2019-10-12 10:58:29',
-                        content: '原名叫我要当小三，后来改名了我也记不清了，跟《我契约联姻的对象有个心上人》是一个作者，你可以搜一下，我遇到点开几次发现有一段时间没更了就懒得去找了'
-                    },
-                    {
-                        author: '天空之母',
-                        submitTime: '2019-10-12 10:58:29',
-                        content: '原名叫我要当小三，后来改名了我也记不清了，跟《我契约联姻的对象有个心上人》是一个作者，你可以搜一下，我遇到点开几次发现有一段时间没更了就懒得去找了'
-                    },
-                    {
-                        author: '天空之母',
-                        submitTime: '2019-10-12 10:58:29',
-                        content: '原名叫我要当小三，后来改名了我也记不清了，跟《我契约联姻的对象有个心上人》是一个作者，你可以搜一下，我遇到点开几次发现有一段时间没更了就懒得去找了'
-                    },
-                    {
-                        author: '天空之母',
-                        submitTime: '2019-10-12 10:58:29',
-                        content: '原名叫我要当小三，后来改名了我也记不清了，跟《我契约联姻的对象有个心上人》是一个作者，你可以搜一下，我遇到点开几次发现有一段时间没更了就懒得去找了'
-                    },
-                    {
-                        author: '天空之母',
-                        submitTime: '2019-10-12 10:58:29',
-                        content: '原名叫我要当小三，后来改名了我也记不清了，跟《我契约联姻的对象有个心上人》是一个作者，你可以搜一下，我遇到点开几次发现有一段时间没更了就懒得去找了'
-                    },
                     {
                         author: '天空之母',
                         submitTime: '2019-10-12 10:58:29',
@@ -219,6 +206,28 @@
         margin-top: 25px;
         font-size: 1.3em;
         color: #515a6e;
+    }
+
+
+    .reply_quote {
+        width: 100%;
+        margin: 10px 0px 25px 0px;
+        padding: 10px 10px 10px 65px;
+        background: #f1f2f3 url("../assets/icons/icon_quote_s.gif") no-repeat 20px 6px;
+    }
+    .quote_icon_e {
+        padding: 0px 65px 10px 0px;
+        background: url("../assets/icons/icon_quote_e.gif") no-repeat 98% 100%;
+    }
+    .reply_quote_info {
+        font-size: 1em;
+        color: #808695;
+    }
+    .reply_quote_floor {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: darkgrey;
+        margin-left: 15px;
     }
 
 

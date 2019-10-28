@@ -1,12 +1,12 @@
 <template>
     <div id="app" class="app">
         <div class="header">
-            <div class="logo">
+            <div class="logo" :style="{ width: logoWidth + 'px' }">
                 <router-link to="/">
                     <h2>啊哈哈哈哈哈啊</h2>
                 </router-link>
             </div>
-            <div class="nav">
+            <div class="nav" :style="{ width: navWidth + 'px' }">
                 <Menu class="menu" mode="horizontal" :theme="theme" :active-name="selected">
                     <router-link to="/">
                         <MenuItem name="1">
@@ -70,6 +70,8 @@
     export default {
         data() {
             return {
+                logoWidth: null,
+                navWidth: null,
                 theme: 'dark',
                 minHeight: null,
                 selected: 1,
@@ -77,6 +79,11 @@
         },
         mounted() {
             this.minHeight = document.documentElement.clientHeight - 170;
+            let clientWidth = document.documentElement.clientWidth;
+            this.logoWidth = (clientWidth - 1200)/2;
+            this.navWidth = clientWidth - this.logoWidth;
+        },
+        created: function () {
         },
         methods: {
             toLogin () {
@@ -100,15 +107,12 @@
     }
     .logo {
         float: left;
-        width: 15%;
         color: #fff;
         text-align: center;
         margin-top: 9px;
-        /*margin-left: 5%;*/
     }
     .nav {
         float: right;
-        width: 85%;
     }
     .menu {
         float: left;
