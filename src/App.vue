@@ -8,14 +8,18 @@
             </div>
             <div class="nav">
                 <Menu class="menu" mode="horizontal" :theme="theme" :active-name="selected">
-                    <MenuItem name="1">
-                        <Icon type="md-home" size="18"/>
-                        <span>首页</span>
-                    </MenuItem>
-                    <MenuItem name="2">
-                        <Icon type="ios-create" ize="18"/>
-                        <span>发表帖子</span>
-                    </MenuItem>
+                    <router-link to="/">
+                        <MenuItem name="1">
+                            <Icon type="md-home" size="18"/>
+                            <span>首页</span>
+                        </MenuItem>
+                    </router-link>
+                    <router-link to="/toSubmitTopic">
+                        <MenuItem name="2">
+                            <Icon type="ios-create" ize="18"/>
+                            <span>发表帖子</span>
+                        </MenuItem>
+                    </router-link>
                     <!-- <Submenu name="3">
                         <template slot="title">
                             <Icon type="ios-stats"/>
