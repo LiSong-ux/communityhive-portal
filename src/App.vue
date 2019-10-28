@@ -96,9 +96,11 @@
     }
     .logo {
         float: left;
+        width: 15%;
         color: #fff;
+        text-align: center;
         margin-top: 9px;
-        margin-left: 100px;
+        /*margin-left: 5%;*/
     }
     .nav {
         float: right;
@@ -106,7 +108,6 @@
     }
     .menu {
         float: left;
-        left: 45px;
         span {
             font-size: 1.2em;
         }
