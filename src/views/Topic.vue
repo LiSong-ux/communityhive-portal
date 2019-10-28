@@ -2,7 +2,10 @@
     <div class="page_main">
         <div class="page_content">
             <div class="topic">
-                <div class="topic_title">在连载区看了篇主角叫何三生的np文，现在怎么都找不到了</div>
+                <div class="topic_top">
+                    <div class="topic_label">【<span>生活吐槽</span>】</div>
+                    <div class="topic_title">在连载区看了篇主角叫何三生的np文，现在怎么都找不到了</div>
+                </div>
                 <div class="topic_head">
                     <div class="topic_author">云中沙雕</div>
                     <div class="topic_time">2019-5-12 15:37:42</div>
@@ -143,12 +146,21 @@
         border-radius: 10px;
         border: 2px solid #819799;
     }
-    .topic_title {
+    .topic_top {
         width: 100%;
-        padding: 10px 15px;
+        border-bottom: 3px solid #1c5899;
+    }
+    .topic_label {
+        display: inline;
+        span {
+            color: #ff78f2;
+        }
+    }
+    .topic_title {
+        display: inline;
+        padding: 10px 5px;
         font-size: 1.5em;
         font-weight: bold;
-        border-bottom: 3px solid #1c5899;
     }
     .topic_head {
         width: 100%;

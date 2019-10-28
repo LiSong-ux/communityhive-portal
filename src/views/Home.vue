@@ -10,6 +10,9 @@
                 <th align="center">最后发表</th>
             </tr>
             <tr class="tr_topic" v-for="(topic, index) in topics" :key="index">
+                <td :class="index==topics.length-1?'label':'label border_bottom'">
+                    【<span>生活吐槽</span>】
+                </td>
                 <td :class="index==topics.length-1?'title':'title border_bottom'">
                     <router-link to="/toTopic">{{ topic.title }}</router-link>
                 </td>
@@ -37,7 +40,7 @@
             return {
                 topics: [
                     {
-                        title: '想讨论一下字音的变迁',
+                        title: '想讨论一下字音的变迁，阿斯顿发送到发阿',
                         author: '一条小团团000',
                         submit: '2019-10-22 10:15:56',
                         replyNum: '127',
@@ -221,8 +224,14 @@
     .tr_topic {
         height: 60px;
     }
+    .label {
+        width: 8%;
+        span {
+            color: #ff78f2;
+        }
+    }
     .title {
-        width: 60%;
+        width: 52%;
         font-size: 1.2em;
         font-weight: bold;
         a {
