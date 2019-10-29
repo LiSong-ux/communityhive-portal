@@ -36,11 +36,19 @@
                     </div>
                     {{ reply.content }}
                 </div>
+                <div class="reply_operate">
+                    <a @click="showModal">回复</a>
+                </div>
             </div>
         </div>
         <div class="submit_reply">
             <editor label="回复"></editor>
         </div>
+        <Modal v-model="modal" footer-hide="true">
+            <p>Content of dialog</p>
+            <p>Content of dialog</p>
+            <p>Content of dialog</p>
+        </Modal>
     </div>
 </template>
 
@@ -105,7 +113,13 @@
                         submitTime: '2019-10-12 10:58:29',
                         content: '原名叫我要当小三，后来改名了我也记不清了，跟《我契约联姻的对象有个心上人》是一个作者，你可以搜一下，我遇到点开几次发现有一段时间没更了就懒得去找了'
                     },
-                ]
+                ],
+                modal: false,
+            }
+        },
+        methods: {
+            showModal() {
+                this.modal = true;
             }
         }
     }
@@ -228,6 +242,35 @@
         font-weight: bold;
         color: darkgrey;
         margin-left: 15px;
+    }
+
+    .reply_operate {
+        width: 100%;
+        height: 50px;
+        opacity: 0.2;
+        line-height: 50px;
+        padding: 0px 15px;
+        margin-top: 15px;
+        background: url("../assets/icons/lattice.png") left top repeat-x;
+        a {
+            color: #333333;
+            padding: 5px 10px 5px 25px;
+            background: url("../assets/icons/fastreply.gif") no-repeat 0 50%;
+        }
+    }
+    .reply_operate:hover {
+        width: 100%;
+        height: 50px;
+        opacity: 1;
+        line-height: 50px;
+        padding: 0px 15px;
+        margin-top: 15px;
+        background: url("../assets/icons/lattice.png") left top repeat-x;
+        a {
+            color: #333333;
+            padding: 5px 10px 5px 25px;
+            background: url("../assets/icons/fastreply.gif") no-repeat 0 50%;
+        }
     }
 
 

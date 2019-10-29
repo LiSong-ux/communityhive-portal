@@ -3,7 +3,7 @@
         <div class="header">
             <div class="logo" :style="{ width: logoWidth + 'px' }">
                 <router-link to="/">
-                    <h2>啊哈哈哈哈哈啊</h2>
+                    <h2>啊哈哈哈哈啊</h2>
                 </router-link>
             </div>
             <div class="nav" :style="{ width: navWidth + 'px' }">
@@ -116,6 +116,7 @@
     }
     .menu {
         float: left;
+        width: 1070px;
         span {
             font-size: 1.2em;
         }
@@ -127,7 +128,6 @@
 
     .login_register {
         float: left;
-        margin-left: 70%;
         width: 130px;
         height: 50px;
     }
