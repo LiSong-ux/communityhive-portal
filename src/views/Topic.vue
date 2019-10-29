@@ -12,7 +12,11 @@
                     <div class="floor">楼主</div>
                 </div>
                 <div class="topic_content">
-                    首先非常理解那些对角色抱有“一辈子只和这一个人在一起” 想法的读者姑娘们。当然我也觉得攻受是不是第一次完全不需要care，有过性｀经验并不代表就是放｀荡或不检点的人，只要是出于爱意的结合都是应当被祝福的，不论是否能走到最后。
+                    首先非常理解那些对角色抱有“一辈子只和这一个人在一起”
+                    想法的读者姑娘们。当然我也觉得攻受是不是第一次完全不需要care，有过性｀经验并不代表就是放｀荡或不检点的人，只要是出于爱意的结合都是应当被祝福的，不论是否能走到最后。
+                </div>
+                <div class="reply_operate">
+                    <a @click="showModal">回复</a>
                 </div>
             </div>
             <div class="reply" v-for="(reply, index) in replyList" :key="index">
@@ -44,16 +48,29 @@
         <div class="submit_reply">
             <editor label="回复"></editor>
         </div>
-        <Modal v-model="modal" footer-hide="true">
-            <p>Content of dialog</p>
-            <p>Content of dialog</p>
-            <p>Content of dialog</p>
+        <Modal class="modal_reply" v-model="modal" footer-hide="true" width="1000">
+            <div class="reply_quote">
+                <div class="quote_icon_e">
+                    <div class="reply_quote_head">
+                        <span class="reply_quote_info">画航听雨眠 发表于 2019-10-22 21:32:19</span>
+                        <span class="reply_quote_floor">5楼</span>
+                    </div>
+                    <div class="modal_reply_overflow">
+                        首先非常理解那些对角色抱有“一辈子只和这一个人在一起” 想法的读者姑娘们。当然我也觉得攻受是不是第一次完全不需要care首先非常理解那些对角色抱有“一辈子只和这一个人在一起” 想法的读者姑娘们。当然我也觉得攻受是不是第一次完全不需要care.
+                        首先非常理解那些对角色抱有“一辈子只和这一个人在一起” 想法的读者姑娘们。当然我也觉得攻受是不是第一次完全不需要care.
+                        首先非常理解那些对角色抱有“一辈子只和这一个人在一起” 想法的读者姑娘们。当然我也觉得攻受是不是第一次完全不需要care.
+                        首先非常理解那些对角色抱有“一辈子只和这一个人在一起” 想法的读者姑娘们。当然我也觉得攻受是不是第一次完全不需要care.
+                    </div>
+                </div>
+            </div>
+            <editor label="回复"></editor>
         </Modal>
     </div>
 </template>
 
 <script>
     import Editor from '../components/Editor'
+
     export default {
         name: "Topic",
         components: {Editor},
@@ -111,7 +128,10 @@
                     {
                         author: '天空之母',
                         submitTime: '2019-10-12 10:58:29',
-                        content: '原名叫我要当小三，后来改名了我也记不清了，跟《我契约联姻的对象有个心上人》是一个作者，你可以搜一下，我遇到点开几次发现有一段时间没更了就懒得去找了'
+                        content: '原名叫我要当小三，后来改名了我也记不清了，跟《我契约联姻的对象有个心上人》是一个作者，你可以搜一下，我遇到点开几次发现有一段时间没更了就懒得去找了.' +
+                            '原名叫我要当小三，后来改名了我也记不清了，跟《我契约联姻的对象有个心上人》是一个作者，你可以搜一下，我遇到点开几次发现有一段时间没更了就懒得去找了' +
+                            '原名叫我要当小三，后来改名了我也记不清了，跟《我契约联姻的对象有个心上人》是一个作者，你可以搜一下，我遇到点开几次发现有一段时间没更了就懒得去找了' +
+                            '原名叫我要当小三，后来改名了我也记不清了，跟《我契约联姻的对象有个心上人》是一个作者，你可以搜一下，我遇到点开几次发现有一段时间没更了就懒得去找了'
                     },
                 ],
                 modal: false,
@@ -142,44 +162,52 @@
 
     .topic {
         width: 96%;
-        padding: 20px;
+        padding: 20px 20px 0px 20px;
         margin: 0px auto;
         border-radius: 10px;
         border: 2px solid #819799;
     }
+
     .topic_top {
         width: 100%;
         border-bottom: 3px solid #1c5899;
     }
+
     .topic_label {
         display: inline;
+
         span {
             color: #ff78f2;
         }
     }
+
     .topic_title {
         display: inline;
         padding: 10px 5px;
         font-size: 1.5em;
         font-weight: bold;
     }
+
     .topic_head {
         width: 100%;
         font-size: 1.2em;
         margin-top: 25px;
         border-bottom: 1px solid #999;
     }
+
     .topic_author {
         color: #27313e;
         display: inline;
         padding: 0px 15px;
         border-right: 2px solid darkgrey;
     }
+
     .topic_time {
         color: cadetblue;
         display: inline;
         padding: 0px 15px;
     }
+
     .topic_content {
         width: 100%;
         padding: 0px 15px;
@@ -194,26 +222,31 @@
         padding: 20px;
         margin: 10px auto;
     }
+
     .reply_head {
         width: 100%;
         font-size: 1.2em;
         border-bottom: 1px solid #999;
     }
+
     .reply_author {
         color: #27313e;
         display: inline;
         padding: 0px 15px;
         border-right: 2px solid darkgrey;
     }
+
     .reply_time {
         color: cadetblue;
         display: inline;
         padding: 0px 15px;
     }
+
     .floor {
         float: right;
         margin-right: 15px;
     }
+
     .reply_content {
         width: 100%;
         padding: 0px 15px;
@@ -229,14 +262,17 @@
         padding: 10px 10px 10px 65px;
         background: #f1f2f3 url("../assets/icons/icon_quote_s.gif") no-repeat 20px 6px;
     }
+
     .quote_icon_e {
         padding: 0px 65px 10px 0px;
         background: url("../assets/icons/icon_quote_e.gif") no-repeat 98% 100%;
     }
+
     .reply_quote_info {
         font-size: 1em;
         color: #808695;
     }
+
     .reply_quote_floor {
         font-size: 1.2em;
         font-weight: bold;
@@ -252,12 +288,14 @@
         padding: 0px 15px;
         margin-top: 15px;
         background: url("../assets/icons/lattice.png") left top repeat-x;
+
         a {
             color: #333333;
             padding: 5px 10px 5px 25px;
             background: url("../assets/icons/fastreply.gif") no-repeat 0 50%;
         }
     }
+
     .reply_operate:hover {
         width: 100%;
         height: 50px;
@@ -266,6 +304,7 @@
         padding: 0px 15px;
         margin-top: 15px;
         background: url("../assets/icons/lattice.png") left top repeat-x;
+
         a {
             color: #333333;
             padding: 5px 10px 5px 25px;
@@ -274,12 +313,25 @@
     }
 
 
-
-    .submit_reply{
+    .submit_reply {
         width: 100%;
         padding: 35px;
         margin: 50px auto;
         border-radius: 10px;
         background-color: #fff;
+    }
+
+
+    .modal_reply /deep/ .ivu-modal-body {
+        padding: 45px 30px 30px 30px;
+    }
+    .modal_reply_overflow {
+        width: 800px;
+        height: 40px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
 </style>
