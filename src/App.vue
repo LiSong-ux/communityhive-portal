@@ -82,6 +82,7 @@
             let clientWidth = document.documentElement.clientWidth;
             this.logoWidth = (clientWidth - 1200)/2;
             this.navWidth = clientWidth - this.logoWidth;
+            console.log(this.logoWidth);
         },
         created: function () {
         },
@@ -121,9 +122,9 @@
             font-size: 1.2em;
         }
     }
-    .nav /deep/ .ivu-menu-horizontal {
-        height: 50px;
-        line-height: 50px;
+    .nav .ivu-menu-horizontal {
+        height: 50px !important;
+        line-height: 50px !important;
     }
 
     .login_register {
