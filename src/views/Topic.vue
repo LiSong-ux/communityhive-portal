@@ -325,6 +325,10 @@
     .modal_reply /deep/ .ivu-modal-body {
         padding: 45px 30px 30px 30px;
     }
+
+    .modal_reply /deep/ .ivu-modal-wrap {
+        z-index: 11010 !important;
+    }
     .modal_reply_overflow {
         width: 800px;
         height: 40px;
