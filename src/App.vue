@@ -6,7 +6,7 @@
                     <h2>啊哈哈哈哈啊</h2>
                 </router-link>
             </div>
-            <div class="nav" :style="{ width: navWidth + 'px' }">
+            <div class="nav">
                 <Menu class="menu" mode="horizontal" :theme="theme" :active-name="selected">
                     <router-link to="/">
                         <MenuItem name="1">
@@ -71,7 +71,6 @@
         data() {
             return {
                 logoWidth: null,
-                navWidth: null,
                 theme: 'dark',
                 minHeight: null,
                 selected: 1,
@@ -79,10 +78,8 @@
         },
         mounted() {
             this.minHeight = document.documentElement.clientHeight - 170;
-            let clientWidth = document.documentElement.clientWidth;
+            let clientWidth = window.innerWidth - 17;
             this.logoWidth = (clientWidth - 1200)/2;
-            this.navWidth = clientWidth - this.logoWidth;
-            console.log(this.logoWidth);
         },
         created: function () {
         },
@@ -113,7 +110,8 @@
         margin-top: 9px;
     }
     .nav {
-        float: right;
+        float: left;
+        width: 1200px;
     }
     .menu {
         float: left;
