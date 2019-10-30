@@ -13,7 +13,7 @@
                     <Input v-model="form.password" placeholder="请输入密码"/>
                 </FormItem>
                 <FormItem>
-                    <Button type="primary">注册</Button>
+                    <Button type="primary" @click="register">注册</Button>
                 </FormItem>
             </Form>
         </div>
@@ -33,7 +33,9 @@
         },
         methods: {
             register() {
-
+                this.axios.get("http://localhost:8083/communityhive_server_war_exploded/register").then(response => {
+                    console.log(response.data);
+                });
             }
         }
     }
