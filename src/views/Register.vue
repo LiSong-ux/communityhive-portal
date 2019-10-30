@@ -12,6 +12,16 @@
                 <FormItem label="密码">
                     <Input v-model="form.password" placeholder="请输入密码"/>
                 </FormItem>
+                <FormItem label="邮箱">
+                    <Input v-model="form.email" placeholder="请输入邮箱"/>
+                </FormItem>
+                <FormItem>
+                    <RadioGroup v-model="form.gender">
+                        <Radio label="0">女</Radio>
+                        <Radio label="1">男</Radio>
+                        <Radio label="2">未知</Radio>
+                    </RadioGroup>
+                </FormItem>
                 <FormItem>
                     <Button type="primary" @click="register">注册</Button>
                 </FormItem>
@@ -28,6 +38,8 @@
                     account: '',
                     username: '',
                     password: '',
+                    email: '',
+                    gender: '',
                 }
             }
         },
@@ -35,8 +47,28 @@
             register() {
                 let params = this.qs.stringify(this.form);
                 this.axios.post("/register", params).then(response => {
-                    console.log(response.data.status);
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.instance('error', resp.msg);
+                    }
+                    this.instance('success', '<p>你现在已经是一个红领巾啦，快去向大家报喜吧。。。</p>')
                 })
+            },
+            instance(type, content) {
+                switch (type) {
+                    case 'success':
+                        this.$Modal.success({
+                            title: '操作成功！',
+                            content: content
+                        });
+                        break;
+                    case 'error':
+                        this.$Modal.error({
+                            title: '操作失败！',
+                            content: content
+                        });
+                        break;
+                }
             }
         }
     }
@@ -49,6 +81,7 @@
         background-color: #dcdee2;
         /*border: 2px solid #999;*/
     }
+
     .container {
         width: 40%;
         padding: 30px 0px;
@@ -56,14 +89,17 @@
         border-radius: 10px;
         background-color: #f8f8f9;
     }
+
     .container_head {
         font-size: 2.0em;
         font-weight: bold;
         text-align: center;
     }
+
     .container_form {
         width: 80%;
         margin: 30px auto;
+
         Button {
             width: 100%;
         }
