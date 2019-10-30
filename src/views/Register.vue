@@ -33,9 +33,8 @@
         },
         methods: {
             register() {
-                this.axios.get("/register").then(response => {
-                    console.log(response.data);
-                });
+                this.axios.post("/register", this.qs.stringify(this.form)).then(response => {
+                })
             }
         }
     }
