@@ -3,11 +3,14 @@
         <div class="container">
             <div class="container_head">注册</div>
             <Form class="container_form" :model="form" label-position="top">
+                <FormItem label="账号">
+                    <Input v-model="form.account" placeholder="请输入账号"/>
+                </FormItem>
                 <FormItem label="用户名">
-                    <Input v-model="form.username"/>
+                    <Input v-model="form.username" placeholder="请输入用户名"/>
                 </FormItem>
                 <FormItem label="密码">
-                    <Input v-model="form.password"/>
+                    <Input v-model="form.password" placeholder="请输入密码"/>
                 </FormItem>
                 <FormItem>
                     <Button type="primary">注册</Button>
@@ -22,11 +25,17 @@
         data() {
             return {
                 form: {
+                    account: '',
                     username: '',
                     password: '',
                 }
             }
         },
+        methods: {
+            register() {
+
+            }
+        }
     }
 </script>
 
@@ -39,8 +48,7 @@
     }
     .container {
         width: 40%;
-        height: 350px;
-        padding-top: 30px;
+        padding: 30px 0px;
         margin: 22px auto;
         border-radius: 10px;
         background-color: #f8f8f9;
