@@ -33,7 +33,7 @@
         },
         methods: {
             register() {
-                this.axios.get("http://localhost:8083/communityhive_server_war_exploded/register").then(response => {
+                this.axios.get("/register").then(response => {
                     console.log(response.data);
                 });
             }

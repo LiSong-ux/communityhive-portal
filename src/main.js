@@ -10,7 +10,12 @@ import 'view-design/dist/styles/iview.css';
 Vue.use(VueAxios, axios);
 Vue.use(ViewUI);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+
+axios.defaults.baseURL = 'http://localhost:8083/communityhive_server_war_exploded';
+
+
 
 new Vue({
   router,
