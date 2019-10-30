@@ -78,8 +78,7 @@
         },
         mounted() {
             this.minHeight = document.documentElement.clientHeight - 170;
-            let clientWidth = window.innerWidth - 17;
-            this.logoWidth = (clientWidth - 1200)/2;
+            this.logoWidth = (window.innerWidth - 1217)/2;
         },
         created: function () {
         },
