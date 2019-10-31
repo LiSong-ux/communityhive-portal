@@ -23,9 +23,6 @@
     export default {
         name: "SubmitTopic",
         components: {Editor},
-        comments: {
-            Editor
-        }
     }
 </script>
 

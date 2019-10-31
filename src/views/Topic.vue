@@ -74,9 +74,6 @@
     export default {
         name: "Topic",
         components: {Editor},
-        comments: {
-            Editor
-        },
         data() {
             return {
                 replyList: [
