@@ -40,13 +40,16 @@
                         综合设置
                     </MenuItem>-->
                 </Menu>
-                <div class="login_register">
+                <div class="login_register" v-if="!isLogin">
                     <div class="login">
                         <Button type="success" ghost @click="toLogin">登录</Button>
                     </div>
                     <div class="register">
                         <Button type="warning" ghost @click="toRegister">注册</Button>
                     </div>
+                </div>
+                <div class="userInfo" v-else>
+                    {{ user.username }}
                 </div>
             </div>
         </div>
@@ -56,9 +59,12 @@
         </div>
         <div class="footer">
             <div class="about">
-                <router-link to="/">网站介绍</router-link> |
-                <router-link to="/">联系方式</router-link> |
-                <router-link to="/">帮助与反馈</router-link> |
+                <router-link to="/">网站介绍</router-link>
+                |
+                <router-link to="/">联系方式</router-link>
+                |
+                <router-link to="/">帮助与反馈</router-link>
+                |
                 <router-link to="/">侵权与投诉</router-link>
             </div>
             <div class="website">Copyright © 2019 啊哈哈哈哈哈啊</div>
@@ -78,15 +84,23 @@
         },
         mounted() {
             this.minHeight = document.documentElement.clientHeight - 170;
-            this.logoWidth = (window.innerWidth - 1217)/2;
+            this.logoWidth = (window.innerWidth - 1217) / 2;
+        },
+        computed: {
+            isLogin: function () {
+                return this.$store.getters.isLogin;
+            },
+            user: function () {
+                return this.$store.getters.getUser;
+            }
         },
         created: function () {
         },
         methods: {
-            toLogin () {
+            toLogin() {
                 this.$router.push('/toLogin');
             },
-            toRegister () {
+            toRegister() {
                 this.$router.push('/toRegister');
             },
         }
@@ -97,45 +111,62 @@
     .app {
         background-color: #f1f2f3;
     }
+
     .header {
         width: 100%;
         height: 50px;
         background-color: #515a6e;
     }
+
     .logo {
         float: left;
         color: #fff;
         text-align: center;
         margin-top: 9px;
     }
+
     .nav {
         float: left;
         width: 1200px;
     }
+
     .menu {
         float: left;
-        width: 1070px;
+        /*width: 1070px;*/
         span {
             font-size: 1.2em;
         }
     }
+
     .nav .ivu-menu-horizontal {
         height: 50px !important;
         line-height: 50px !important;
     }
 
     .login_register {
-        float: left;
+        float: right;
         width: 130px;
         height: 50px;
     }
+
     .login {
         float: left;
         margin-top: 9px;
     }
+
     .register {
         float: right;
         margin-top: 9px;
+    }
+
+    .userInfo {
+        float: right;
+        /*width: 130px;*/
+        height: 50px;
+        color: #b9b4ff;
+        line-height: 50px;
+        font-size: 24px;
+        font-weight: bold;
     }
 
 
@@ -144,6 +175,7 @@
         margin: 0 auto;
         padding: 20px 0px;
     }
+
     .top_img {
         margin-bottom: 10px;
     }
@@ -157,9 +189,11 @@
         text-align: center;
         background-color: #515a6e;
     }
+
     .about a {
         color: #fff;
     }
+
     .website {
         margin-top: 15px;
     }

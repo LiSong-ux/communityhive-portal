@@ -20,12 +20,12 @@
 <script>
     export default {
         data() {
-          return {
-              form: {
-                  account: '',
-                  password: '',
-              }
-          }
+            return {
+                form: {
+                    account: '',
+                    password: '',
+                }
+            }
         },
         methods: {
             login() {
@@ -35,6 +35,8 @@
                     if (resp.status != 200) {
                         this.instance('error', resp.msg);
                     }
+                    console.log(resp.data);
+                    this.$store.commit("setUser", resp.data);
                     this.$router.push("/");
                 })
             },
@@ -65,6 +67,7 @@
         background-color: #dcdee2;
         /*border: 2px solid #999;*/
     }
+
     .container {
         width: 40%;
         height: 350px;
@@ -73,14 +76,17 @@
         border-radius: 10px;
         background-color: #f8f8f9;
     }
+
     .container_head {
         font-size: 2.0em;
         font-weight: bold;
         text-align: center;
     }
+
     .container_form {
         width: 80%;
         margin: 30px auto;
+
         Button {
             width: 100%;
         }
