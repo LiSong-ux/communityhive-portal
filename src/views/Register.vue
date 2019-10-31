@@ -51,7 +51,7 @@
                     if (resp.status != 200) {
                         this.instance('error', resp.msg);
                     }
-                    this.instance('success', '<p>你现在已经是一个红领巾啦，快去向大家报喜吧。。。</p>')
+                    this.instance('success', '<p>你现在已经是一个红领巾啦，快去发帖庆祝吧。。。</p>')
                 })
             },
             instance(type, content) {
