@@ -51,7 +51,9 @@
                     if (resp.status != 200) {
                         this.instance('error', resp.msg);
                     }
-                    this.instance('success', '<p>你现在已经是一个红领巾啦，快去发帖庆祝吧。。。</p>')
+                    this.$store.commit('setUser', resp.data);
+                    let content = '<p style="font-size: 16px">你现在已经是一个红领巾啦，快去发帖庆祝吧。。。</p>';
+                    this.instance('success', content);
                 })
             },
             instance(type, content) {
@@ -59,7 +61,10 @@
                     case 'success':
                         this.$Modal.success({
                             title: '操作成功！',
-                            content: content
+                            content: content,
+                            onOk: () => {
+                                this.$router.push('/');
+                            },
                         });
                         break;
                     case 'error':
