@@ -4,13 +4,13 @@
             <div class="container_head">登录</div>
             <Form class="container_form" :model="form" label-position="top">
                 <FormItem label="用户名">
-                    <Input v-model="form.username"/>
+                    <Input v-model="form.account"/>
                 </FormItem>
                 <FormItem label="密码">
                     <Input v-model="form.password"/>
                 </FormItem>
                 <FormItem>
-                    <Button type="primary">登录</Button>
+                    <Button type="primary" @click="login">登录</Button>
                 </FormItem>
             </Form>
         </div>
@@ -22,11 +22,39 @@
         data() {
           return {
               form: {
-                  username: '',
+                  account: '',
                   password: '',
               }
           }
         },
+        methods: {
+            login() {
+                let params = this.qs.stringify(this.form);
+                this.axios.post("/login", params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.instance('error', resp.msg);
+                    }
+                    this.$router.push("/");
+                })
+            },
+            instance(type, content) {
+                switch (type) {
+                    case 'success':
+                        this.$Modal.success({
+                            title: '操作成功！',
+                            content: content
+                        });
+                        break;
+                    case 'error':
+                        this.$Modal.error({
+                            title: '操作失败！',
+                            content: content
+                        });
+                        break;
+                }
+            },
+        }
     }
 </script>
 
