@@ -7,7 +7,7 @@
                     <Input v-model="form.account"/>
                 </FormItem>
                 <FormItem label="密码">
-                    <Input v-model="form.password"/>
+                    <Input type="password" v-model="form.password"/>
                 </FormItem>
                 <FormItem>
                     <Button type="primary" @click="login">登录</Button>
@@ -35,7 +35,6 @@
                     if (resp.status != 200) {
                         this.instance('error', resp.msg);
                     }
-                    console.log(resp.data);
                     this.$store.commit("setUser", resp.data);
                     this.$router.push("/");
                 })

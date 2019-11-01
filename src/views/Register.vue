@@ -6,11 +6,14 @@
                 <FormItem label="账号">
                     <Input v-model="form.account" placeholder="请输入账号"/>
                 </FormItem>
+                <FormItem label="密码">
+                    <Input type="password" v-model="form.password" placeholder="请输入密码"/>
+                </FormItem>
+                <FormItem label="确认密码">
+                    <Input type="password" v-model="form.checkPwd" placeholder="请确认密码"/>
+                </FormItem>
                 <FormItem label="用户名">
                     <Input v-model="form.username" placeholder="请输入用户名"/>
-                </FormItem>
-                <FormItem label="密码">
-                    <Input v-model="form.password" placeholder="请输入密码"/>
                 </FormItem>
                 <FormItem label="邮箱">
                     <Input v-model="form.email" placeholder="请输入邮箱"/>
@@ -36,8 +39,9 @@
             return {
                 form: {
                     account: '',
-                    username: '',
                     password: '',
+                    checkPwd: '',
+                    username: '',
                     email: '',
                     gender: '',
                 }
