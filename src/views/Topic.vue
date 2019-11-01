@@ -76,6 +76,7 @@
         components: {Editor},
         data() {
             return {
+                topic: {},
                 replyList: [
                     {
                         author: '天空之母',

@@ -21,7 +21,7 @@
         },
         methods: {
             getContent: function () {
-                alert(this.editorContent)
+                this.$store.commit('setContent', this.editorContent);
             }
         },
         mounted() {

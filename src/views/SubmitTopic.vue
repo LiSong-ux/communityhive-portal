@@ -4,10 +4,10 @@
             <h2>发表帖子</h2>
             <div class="topic_top">
                 <div class="topic_label">
-                    <Input size="large" placeholder="四字标签" style="width: 86px;"/>
+                    <Input v-model="topic.label" size="large" placeholder="四字标签" style="width: 86px;"/>
                 </div>
                 <div class="topic_title">
-                    <Input size="large" placeholder="请输入标题" style="width: 60%;"/>
+                    <Input v-model="topic.title" size="large" placeholder="请输入标题" style="width: 60%;"/>
                     <span>还可输入80个字符</span>
                 </div>
             </div>
@@ -23,6 +23,51 @@
     export default {
         name: "SubmitTopic",
         components: {Editor},
+        data() {
+            return {
+                topic: {
+                    label: '',
+                    title: '',
+                }
+            }
+        },
+        computed: {
+            content: function () {
+                return this.$store.getters.getContent;
+            }
+        },
+        methods: {
+            submitTopic() {
+                this.topic.content = this.content;
+                let params = this.qs.stringify(this.topic);
+                this.axios.post('/submitTopic', params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.instance('error', resp.msg);
+                    }
+                    this.$router.push({path:'/topic', query:{id:resp.data.id}});
+                })
+            },
+            instance(type, content) {
+                switch (type) {
+                    case 'success':
+                        this.$Modal.success({
+                            title: '操作成功！',
+                            content: content,
+                            onOk: () => {
+                                this.$router.push('/');
+                            },
+                        });
+                        break;
+                    case 'error':
+                        this.$Modal.error({
+                            title: '操作失败！',
+                            content: content
+                        });
+                        break;
+                }
+            }
+        }
     }
 </script>
 
