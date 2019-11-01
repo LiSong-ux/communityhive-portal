@@ -12,7 +12,8 @@
                 </div>
             </div>
             <div class="topic_content">
-                <editor label="发表帖子"></editor>
+                <editor label="发表帖子" ref="editor"></editor>
+                <Button class="submit_button" type="primary" size="large" @click="submitTopic">发表帖子</Button>
             </div>
         </div>
     </div>
@@ -28,17 +29,19 @@
                 topic: {
                     label: '',
                     title: '',
+                    content: ''
                 }
             }
         },
-        computed: {
-            content: function () {
-                return this.$store.getters.getContent;
-            }
-        },
+        // computed: {
+        //     content: function () {
+        //         return this.$store.getters.getContent;
+        //     }
+        // },
         methods: {
             submitTopic() {
-                this.topic.content = this.content;
+                this.$refs.editor.getContent();
+                this.topic.content = this.$store.getters.getContent;
                 let params = this.qs.stringify(this.topic);
                 this.axios.post('/submitTopic', params).then(response => {
                     let resp = response.data;
@@ -107,5 +110,8 @@
     .topic_content {
         width: 100%;
         margin-top: 15px;
+    }
+    .submit_button {
+        width: 120px;
     }
 </style>

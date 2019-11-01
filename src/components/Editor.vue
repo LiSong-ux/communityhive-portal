@@ -2,7 +2,7 @@
     <div>
         <div class="edit_container" ref="editor"></div>
         <!--<button v-on:click="getContent">查看内容</button>-->
-        <Button class="submit_button" type="primary" size="large" v-on:click="getContent">{{ label }}</Button>
+        <!--<Button class="submit_button" type="primary" size="large" v-on:click="getContent">{{ label }}</Button>-->
     </div>
 </template>
 
@@ -28,7 +28,7 @@
             var editor = new E(this.$refs.editor)
             editor.customConfig.onchange = (html) => {
                 this.editorContent = html
-            }
+            };
             editor.create()
         }
     }

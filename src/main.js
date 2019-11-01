@@ -17,6 +17,7 @@ Vue.config.productionTip = false;
 
 axios.defaults.baseURL = 'http://localhost:8083/communityhive_server_war_exploded';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.withCredentials =true;
 
 
 

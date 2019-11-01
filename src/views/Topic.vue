@@ -76,7 +76,9 @@
         components: {Editor},
         data() {
             return {
-                topic: {},
+                topic: {
+                    id: '',
+                },
                 replyList: [
                     {
                         author: '天空之母',
@@ -134,6 +136,9 @@
                 ],
                 modal: false,
             }
+        },
+        created: function(){
+            // this.topic.id = this.$route.query.id;
         },
         methods: {
             showModal() {
