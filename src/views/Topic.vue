@@ -8,7 +8,7 @@
                 </div>
                 <div class="topic_head">
                     <div class="topic_author">{{ topic.username }}</div>
-                    <div class="topic_time">{{ topic.submittime | dateFormat }}</div>
+                    <div class="topic_time">发表于 {{ topic.submittime | dateFormat }}</div>
                     <div class="floor">楼主</div>
                 </div>
                 <div class="topic_content" v-html="topic.content"></div>
@@ -26,19 +26,16 @@
                     <div class="reply_quote" v-show="reply.quote!=0">
                         <div class="quote_icon_e">
                             <div class="reply_quote_head">
-                                <span class="reply_quote_info">画航听雨眠 发表于 2019-10-22 21:32:19</span>
-                                <span class="reply_quote_floor">5楼</span>
+                                <span class="reply_quote_info">{{ replyList[reply.quoteIndex].username }} 发表于 {{ replyList[reply.quoteIndex].submittime | dateFormat }}</span>
+                                <span class="reply_quote_floor">{{ replyList[reply.quoteIndex].floor }}楼</span>
                             </div>
-                            <span>
-                                首先非常理解那些对角色抱有“一辈子只和这一个人在一起” 想法的读者姑娘们。
-                                当然我也觉得攻受是不是第一次完全不需要care
-                            </span>
+                            <span v-html="replyList[reply.quoteIndex].content"></span>
                         </div>
                     </div>
                     <span v-html="reply.content"></span>
                 </div>
                 <div class="reply_operate">
-                    <a @click="showModal(index+1)">回复</a>
+                    <a @click="showModal(reply.floor)">回复</a>
                 </div>
             </div>
         </div>
@@ -50,15 +47,10 @@
             <div class="reply_quote">
                 <div class="quote_icon_e">
                     <div class="reply_quote_head">
-                        <span class="reply_quote_info">画航听雨眠 发表于 2019-10-22 21:32:19</span>
-                        <span class="reply_quote_floor">5楼</span>
+                        <span class="reply_quote_info">{{ toQuote.username }} 发表于 {{ toQuote.submittime | dateFormat }}</span>
+                        <span class="reply_quote_floor">{{ toQuote.floor }}楼</span>
                     </div>
-                    <div class="modal_reply_overflow">
-                        首先非常理解那些对角色抱有“一辈子只和这一个人在一起” 想法的读者姑娘们。当然我也觉得攻受是不是第一次完全不需要care首先非常理解那些对角色抱有“一辈子只和这一个人在一起” 想法的读者姑娘们。当然我也觉得攻受是不是第一次完全不需要care.
-                        首先非常理解那些对角色抱有“一辈子只和这一个人在一起” 想法的读者姑娘们。当然我也觉得攻受是不是第一次完全不需要care.
-                        首先非常理解那些对角色抱有“一辈子只和这一个人在一起” 想法的读者姑娘们。当然我也觉得攻受是不是第一次完全不需要care.
-                        首先非常理解那些对角色抱有“一辈子只和这一个人在一起” 想法的读者姑娘们。当然我也觉得攻受是不是第一次完全不需要care.
-                    </div>
+                    <div class="modal_reply_overflow" v-html="toQuote.content"></div>
                 </div>
             </div>
             <editor ref="editor_qu" :isClear="isClear"></editor>
@@ -132,7 +124,7 @@
                     },
                 ],
                 newReply: {},
-                quoteFloor: null,
+                toQuote: {},
                 modal: false,
                 isClear: false,
             }
@@ -162,6 +154,10 @@
                 } else {
                     this.$refs.editor_qu.getContent();
                 }
+                if (this.$store.getters.getContent==='') {
+                    this.$Message.error('请输入内容！');
+                    return;
+                }
                 this.newReply.topicId = this.$route.query.id;
                 this.newReply.quote = this.quoteFloor;
                 this.newReply.content = this.$store.getters.getContent;
@@ -172,13 +168,14 @@
                         this.instance('error', resp.msg);
                     }
                     this.isClear = true;
+                    this.$refs.editor.editorContent = '';
                     this.modal = false;
                     this.getTopic();
                 })
             },
             showModal(floor) {
                 this.modal = true;
-                this.quoteFloor = floor;
+                this.toQuote = this.replyList[floor-1];
             },
             instance(type, content) {
                 switch (type) {

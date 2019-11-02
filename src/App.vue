@@ -206,4 +206,8 @@
     .website {
         margin-top: 15px;
     }
+
+    .ivu-message {
+        z-index: 22000 !important;
+    }
 </style>
