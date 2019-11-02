@@ -12,12 +12,24 @@
     export default {
         name: 'editor',
         props: {
-            label: String
+            isClear: {
+                type: Boolean,
+                default: false
+            }
         },
         data() {
             return {
+                editor: null,
                 editorContent: ''
             }
+        },
+        watch: {
+            isClear(val) {
+                // 触发清除文本域内容
+                if (val) {
+                    this.editor.txt.clear();
+                }
+            },
         },
         methods: {
             getContent: function () {
@@ -25,11 +37,11 @@
             }
         },
         mounted() {
-            var editor = new E(this.$refs.editor)
-            editor.customConfig.onchange = (html) => {
+            this.editor = new E(this.$refs.editor)
+            this.editor.customConfig.onchange = (html) => {
                 this.editorContent = html
             };
-            editor.create()
+            this.editor.create();
         }
     }
 </script>
@@ -38,8 +50,5 @@
     .edit_container {
         text-align: left;
         margin-bottom: 20px;
-    }
-    .submit_button {
-        width: 120px;
     }
 </style>

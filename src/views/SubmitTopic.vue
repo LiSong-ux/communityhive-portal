@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="topic_content">
-                <editor label="发表帖子" ref="editor"></editor>
+                <editor ref="editor"></editor>
                 <Button class="submit_button" type="primary" size="large" @click="submitTopic">发表帖子</Button>
             </div>
         </div>

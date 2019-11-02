@@ -18,12 +18,12 @@
             </div>
             <div class="reply" v-for="(reply, index) in replyList" :key="index">
                 <div class="reply_head">
-                    <div class="reply_author">{{ reply.author }}</div>
-                    <div class="reply_time">发表于 {{ reply.submitTime }}</div>
-                    <div class="floor">{{ index+1 }}楼</div>
+                    <div class="reply_author">{{ reply.username }}</div>
+                    <div class="reply_time">发表于 {{ reply.submittime | dateFormat }}</div>
+                    <div class="floor">{{ reply.floor }}楼</div>
                 </div>
                 <div class="reply_content">
-                    <div class="reply_quote">
+                    <div class="reply_quote" v-show="reply.quote!=0">
                         <div class="quote_icon_e">
                             <div class="reply_quote_head">
                                 <span class="reply_quote_info">画航听雨眠 发表于 2019-10-22 21:32:19</span>
@@ -35,16 +35,16 @@
                             </span>
                         </div>
                     </div>
-                    {{ reply.content }}
+                    <span v-html="reply.content"></span>
                 </div>
                 <div class="reply_operate">
-                    <a @click="showModal">回复</a>
+                    <a @click="showModal(index+1)">回复</a>
                 </div>
             </div>
         </div>
         <div class="submit_reply">
-            <editor></editor>
-            <Button class="submit_button" type="primary" size="large">回复</Button>
+            <editor ref="editor" :isClear="isClear"></editor>
+            <Button class="submit_button" type="primary" size="large" @click="submitReply(0)">回复</Button>
         </div>
         <Modal class="modal_reply" v-model="modal" footer-hide width="1000">
             <div class="reply_quote">
@@ -61,8 +61,8 @@
                     </div>
                 </div>
             </div>
-            <editor></editor>
-            <Button class="submit_button" type="primary" size="large">回复</Button>
+            <editor ref="editor_qu" :isClear="isClear"></editor>
+            <Button class="submit_button" type="primary" size="large" @click="submitReply(1)">回复</Button>
         </Modal>
     </div>
 </template>
@@ -131,7 +131,10 @@
                             '原名叫我要当小三，后来改名了我也记不清了，跟《我契约联姻的对象有个心上人》是一个作者，你可以搜一下，我遇到点开几次发现有一段时间没更了就懒得去找了'
                     },
                 ],
+                newReply: {},
+                quoteFloor: null,
                 modal: false,
+                isClear: false,
             }
         },
         created: function(){
@@ -139,6 +142,9 @@
         },
         methods: {
             init(){
+              this.getTopic();
+            },
+            getTopic(){
                 this.axios.get('/topic', {params:{id:this.$route.query.id}}).then(response => {
                    let resp = response.data;
                    if (resp.status!=200) {
@@ -146,10 +152,52 @@
                    }
                    this.topic = resp.data.topic;
                    this.replyList = resp.data.replyList;
+                   this.isClear = false;
                 });
             },
-            showModal() {
+            submitReply(num) {
+                if (num==0){
+                    this.$refs.editor.getContent();
+                    this.quoteFloor = 0;
+                } else {
+                    this.$refs.editor_qu.getContent();
+                }
+                this.newReply.topicId = this.$route.query.id;
+                this.newReply.quote = this.quoteFloor;
+                this.newReply.content = this.$store.getters.getContent;
+                let params = this.qs.stringify(this.newReply);
+                this.axios.post('/submitReply', params).then(response => {
+                    let resp = response.data;
+                    if (resp.status!=200){
+                        this.instance('error', resp.msg);
+                    }
+                    this.isClear = true;
+                    this.modal = false;
+                    this.getTopic();
+                })
+            },
+            showModal(floor) {
                 this.modal = true;
+                this.quoteFloor = floor;
+            },
+            instance(type, content) {
+                switch (type) {
+                    case 'success':
+                        this.$Modal.success({
+                            title: '操作成功！',
+                            content: content,
+                            onOk: () => {
+                                this.$router.push('/');
+                            },
+                        });
+                        break;
+                    case 'error':
+                        this.$Modal.error({
+                            title: '操作失败！',
+                            content: content
+                        });
+                        break;
+                }
             }
         }
     }
