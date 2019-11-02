@@ -2,31 +2,31 @@
     <div class="home">
         <table class="table">
             <tr class="tr_head border_bottom">
-                <th class="th_title" align="left">
+                <th class="th_title" align="left" colspan="2">
                     <div class="title_box">全部主题</div>
                 </th>
                 <th align="center">作者</th>
                 <th align="center">回复 / 查看</th>
                 <th align="center">最后发表</th>
             </tr>
-            <tr class="tr_topic" v-for="(topic, index) in topics" :key="index">
-                <td :class="index==topics.length-1?'label':'label border_bottom'">
-                    【<span>生活吐槽</span>】
+            <tr class="tr_topic" v-for="(topic, index) in topicList" :key="index">
+                <td :class="index==topicList.length-1?'label':'label border_bottom'">
+                    【<span>{{ topic.label }}</span>】
                 </td>
-                <td :class="index==topics.length-1?'title':'title border_bottom'">
-                    <router-link to="/toTopic">{{ topic.title }}</router-link>
+                <td :class="index==topicList.length-1?'title':'title border_bottom'">
+                    <router-link :to="'/toTopic?id='+topic.id">{{ topic.title }}</router-link>
                 </td>
-                <td :class="index==topics.length-1?'author':'author border_bottom'">
-                    <h3>{{ topic.author }}</h3>
-                    <p>{{ topic.submit }}</p>
+                <td :class="index==topicList.length-1?'author':'author border_bottom'">
+                    <h3>{{ topic.username }}</h3>
+                    <p>{{ topic.submittime | dateFormat }}</p>
                 </td>
-                <td :class="index==topics.length-1?'reply_view':'reply_view border_bottom'">
-                    <h3>{{ topic.replyNum }}</h3>
-                    <p>{{ topic.viewNum }}</p>
+                <td :class="index==topicList.length-1?'reply_view':'reply_view border_bottom'">
+                    <h3>{{ topic.replycount }}</h3>
+                    <p>{{ topic.viewcount }}</p>
                 </td>
-                <td :class="index==topics.length-1?'latestReply':'latestReply border_bottom'">
-                    <h3>{{ topic.latestReply }}</h3>
-                    <p>{{ topic.latestSubmit }}</p>
+                <td :class="index==topicList.length-1?'latestReply':'latestReply border_bottom'">
+                    <h3>{{ topic.lastReply }}</h3>
+                    <p>{{ topic.lastSubmit | dateFormat }}</p>
                 </td>
             </tr>
         </table>
@@ -38,162 +38,26 @@
         name: 'home',
         data() {
             return {
-                topics: [
-                    {
-                        title: '想讨论一下字音的变迁，阿斯顿发送到发阿',
-                        author: '一条小团团000',
-                        submit: '2019-10-22 10:15:56',
-                        replyNum: '127',
-                        viewNum: '3756',
-                        latestReply: '乔碧萝殿下',
-                        latestSubmit: '2019-10-26 15:27:14'
-                    },
-                    {
-                        title: '想讨论一下字音的变迁',
-                        author: '一条小团团',
-                        submit: '2019-10-22 10:15:56',
-                        replyNum: '127',
-                        viewNum: '3756',
-                        latestReply: '乔碧萝殿下',
-                        latestSubmit: '2019-10-26 15:27:14'
-                    },
-                    {
-                        title: '想讨论一下字音的变迁',
-                        author: '一条小团团',
-                        submit: '2019-10-22 10:15:56',
-                        replyNum: '127',
-                        viewNum: '3756',
-                        latestReply: '乔碧萝殿下',
-                        latestSubmit: '2019-10-26 15:27:14'
-                    },
-                    {
-                        title: '想讨论一下字音的变迁',
-                        author: '一条小团团',
-                        submit: '2019-10-22 10:15:56',
-                        replyNum: '127',
-                        viewNum: '3756',
-                        latestReply: '乔碧萝殿下',
-                        latestSubmit: '2019-10-26 15:27:14'
-                    },
-                    {
-                        title: '想讨论一下字音的变迁',
-                        author: '一条小团团',
-                        submit: '2019-10-22 10:15:56',
-                        replyNum: '127',
-                        viewNum: '3756',
-                        latestReply: '乔碧萝殿下',
-                        latestSubmit: '2019-10-26 15:27:14'
-                    },
-                    {
-                        title: '想讨论一下字音的变迁',
-                        author: '一条小团团',
-                        submit: '2019-10-22 10:15:56',
-                        replyNum: '127',
-                        viewNum: '3756',
-                        latestReply: '乔碧萝殿下',
-                        latestSubmit: '2019-10-26 15:27:14'
-                    },
-                    {
-                        title: '想讨论一下字音的变迁',
-                        author: '一条小团团',
-                        submit: '2019-10-22 10:15:56',
-                        replyNum: '127',
-                        viewNum: '3756',
-                        latestReply: '乔碧萝殿下',
-                        latestSubmit: '2019-10-26 15:27:14'
-                    },
-                    {
-                        title: '想讨论一下字音的变迁',
-                        author: '一条小团团',
-                        submit: '2019-10-22 10:15:56',
-                        replyNum: '127',
-                        viewNum: '3756',
-                        latestReply: '乔碧萝殿下',
-                        latestSubmit: '2019-10-26 15:27:14'
-                    },
-                    {
-                        title: '想讨论一下字音的变迁',
-                        author: '一条小团团',
-                        submit: '2019-10-22 10:15:56',
-                        replyNum: '127',
-                        viewNum: '3756',
-                        latestReply: '乔碧萝殿下',
-                        latestSubmit: '2019-10-26 15:27:14'
-                    },
-                    {
-                        title: '想讨论一下字音的变迁',
-                        author: '一条小团团',
-                        submit: '2019-10-22 10:15:56',
-                        replyNum: '127',
-                        viewNum: '3756',
-                        latestReply: '乔碧萝殿下',
-                        latestSubmit: '2019-10-26 15:27:14'
-                    },
-                    {
-                        title: '想讨论一下字音的变迁',
-                        author: '一条小团团',
-                        submit: '2019-10-22 10:15:56',
-                        replyNum: '127',
-                        viewNum: '3756',
-                        latestReply: '乔碧萝殿下',
-                        latestSubmit: '2019-10-26 15:27:14'
-                    },
-                    {
-                        title: '想讨论一下字音的变迁',
-                        author: '一条小团团',
-                        submit: '2019-10-22 10:15:56',
-                        replyNum: '127',
-                        viewNum: '3756',
-                        latestReply: '乔碧萝殿下',
-                        latestSubmit: '2019-10-26 15:27:14'
-                    },
-                    {
-                        title: '想讨论一下字音的变迁',
-                        author: '一条小团团',
-                        submit: '2019-10-22 10:15:56',
-                        replyNum: '127',
-                        viewNum: '3756',
-                        latestReply: '乔碧萝殿下',
-                        latestSubmit: '2019-10-26 15:27:14'
-                    },
-                    {
-                        title: '想讨论一下字音的变迁',
-                        author: '一条小团团',
-                        submit: '2019-10-22 10:15:56',
-                        replyNum: '127',
-                        viewNum: '3756',
-                        latestReply: '乔碧萝殿下',
-                        latestSubmit: '2019-10-26 15:27:14'
-                    },
-                    {
-                        title: '想讨论一下字音的变迁',
-                        author: '一条小团团',
-                        submit: '2019-10-22 10:15:56',
-                        replyNum: '127',
-                        viewNum: '3756',
-                        latestReply: '乔碧萝殿下',
-                        latestSubmit: '2019-10-26 15:27:14'
-                    },
-                    {
-                        title: '想讨论一下字音的变迁',
-                        author: '一条小团团',
-                        submit: '2019-10-22 10:15:56',
-                        replyNum: '127',
-                        viewNum: '3756',
-                        latestReply: '乔碧萝殿下',
-                        latestSubmit: '2019-10-26 15:27:14'
-                    },
-                    {
-                        title: '想讨论一下字音的变迁',
-                        author: '一条小团团',
-                        submit: '2019-10-22 10:15:56',
-                        replyNum: '127',
-                        viewNum: '3756',
-                        latestReply: '乔碧萝殿下',
-                        latestSubmit: '2019-10-26 15:27:14'
-                    },
-                ],
+                topicList: [],
             }
+        },
+        created: function(){
+          this.init();
+        },
+        methods: {
+            init(){
+                this.getTopicList();
+            },
+            getTopicList(){
+                this.axios.get('/topicList').then(response => {
+                    let resp = response.data;
+                    if (resp.status!=200) {
+                        this.$Message.error(resp.msg);
+                        return;
+                    }
+                    this.topicList = resp.data;
+                });
+            },
         }
     }
 </script>
@@ -201,7 +65,7 @@
 <style scoped lang="scss">
     .home {
         width: 100%;
-        padding: 0px 20px;
+        padding: 0px 20px 20px 20px;
         border-radius: 10px;
         background-color: #fff;
     }

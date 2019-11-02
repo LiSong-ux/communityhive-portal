@@ -141,6 +141,7 @@
                    let resp = response.data;
                    if (resp.status!=200) {
                        this.$Message.error(resp.msg);
+                       return;
                    }
                    this.topic = resp.data.topic;
                    this.replyList = resp.data.replyList;

@@ -41,12 +41,25 @@
         methods: {
             submitTopic() {
                 this.$refs.editor.getContent();
+                if (this.topic.label==='') {
+                    this.$Message.error('请输入帖子标签！');
+                    return;
+                }
+                if (this.topic.title==='') {
+                    this.$Message.error('请输入标题！');
+                    return;
+                }
+                if (this.$store.getters.getContent==='') {
+                    this.$Message.error('请输入内容！');
+                    return;
+                }
                 this.topic.content = this.$store.getters.getContent;
                 let params = this.qs.stringify(this.topic);
                 this.axios.post('/submitTopic', params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.instance('error', resp.msg);
+                        return;
                     }
                     this.$router.push({path:'/toTopic', query:{id:resp.data}});
                 })
