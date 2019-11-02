@@ -3,18 +3,15 @@
         <div class="page_content">
             <div class="topic">
                 <div class="topic_top">
-                    <div class="topic_label">【<span>生活吐槽</span>】</div>
-                    <div class="topic_title">在连载区看了篇主角叫何三生的np文，现在怎么都找不到了</div>
+                    <div class="topic_label">【<span>{{ topic.label }}</span>】</div>
+                    <div class="topic_title">{{ topic.title }}</div>
                 </div>
                 <div class="topic_head">
-                    <div class="topic_author">云中沙雕</div>
-                    <div class="topic_time">2019-5-12 15:37:42</div>
+                    <div class="topic_author">{{ topic.username }}</div>
+                    <div class="topic_time">{{ topic.submittime | dateFormat }}</div>
                     <div class="floor">楼主</div>
                 </div>
-                <div class="topic_content">
-                    首先非常理解那些对角色抱有“一辈子只和这一个人在一起”
-                    想法的读者姑娘们。当然我也觉得攻受是不是第一次完全不需要care，有过性｀经验并不代表就是放｀荡或不检点的人，只要是出于爱意的结合都是应当被祝福的，不论是否能走到最后。
-                </div>
+                <div class="topic_content" v-html="topic.content"></div>
                 <div class="reply_operate">
                     <a @click="showModal">回复</a>
                 </div>
@@ -46,9 +43,10 @@
             </div>
         </div>
         <div class="submit_reply">
-            <editor label="回复"></editor>
+            <editor></editor>
+            <Button class="submit_button" type="primary" size="large">回复</Button>
         </div>
-        <Modal class="modal_reply" v-model="modal" footer-hide="true" width="1000">
+        <Modal class="modal_reply" v-model="modal" footer-hide width="1000">
             <div class="reply_quote">
                 <div class="quote_icon_e">
                     <div class="reply_quote_head">
@@ -63,7 +61,8 @@
                     </div>
                 </div>
             </div>
-            <editor label="回复"></editor>
+            <editor></editor>
+            <Button class="submit_button" type="primary" size="large">回复</Button>
         </Modal>
     </div>
 </template>
@@ -76,9 +75,7 @@
         components: {Editor},
         data() {
             return {
-                topic: {
-                    id: '',
-                },
+                topic: {},
                 replyList: [
                     {
                         author: '天空之母',
@@ -138,9 +135,19 @@
             }
         },
         created: function(){
-            // this.topic.id = this.$route.query.id;
+            this.init();
         },
         methods: {
+            init(){
+                this.axios.get('/topic', {params:{id:this.$route.query.id}}).then(response => {
+                   let resp = response.data;
+                   if (resp.status!=200) {
+                       this.$Message.error(resp.msg);
+                   }
+                   this.topic = resp.data.topic;
+                   this.replyList = resp.data.replyList;
+                });
+            },
             showModal() {
                 this.modal = true;
             }
@@ -340,5 +347,8 @@
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
+    }
+    .submit_button {
+        width: 120px;
     }
 </style>

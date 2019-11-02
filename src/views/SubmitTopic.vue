@@ -48,7 +48,7 @@
                     if (resp.status != 200) {
                         this.instance('error', resp.msg);
                     }
-                    this.$router.push({path:'/topic', query:{id:resp.data.id}});
+                    this.$router.push({path:'/toTopic', query:{id:resp.data}});
                 })
             },
             instance(type, content) {
