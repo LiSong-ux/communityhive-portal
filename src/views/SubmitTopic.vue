@@ -4,11 +4,11 @@
             <h2>发表帖子</h2>
             <div class="topic_top">
                 <div class="topic_label">
-                    <Input v-model="topic.label" size="large" placeholder="四字标签" style="width: 86px;"/>
+                    <Input v-model="topic.label" maxlength="4" size="large" placeholder="四字标签" style="width: 86px;"/>
                 </div>
                 <div class="topic_title">
-                    <Input v-model="topic.title" size="large" placeholder="请输入标题" style="width: 60%;"/>
-                    <span>还可输入80个字符</span>
+                    <Input v-model="topic.title" maxlength="35" show-word-limit size="large" placeholder="请输入标题" style="width: 60%;"/>
+                    <span>最多输入35个字符</span>
                 </div>
             </div>
             <div class="topic_content">
@@ -45,9 +45,18 @@
                     this.$Message.error('请输入帖子标签！');
                     return;
                 }
+                let reg = /^[\u4e00-\u9fa5]{2,4}$/;
+                if (!reg.test(this.topic.label)) {
+                    this.$Message.error('标签为2至4位汉字');
+                    return;
+                }
                 if (this.topic.title==='') {
                     this.$Message.error('请输入标题！');
                     return;
+                }
+                if (this.topic.title.length<4) {
+                    this.$Message.error('帖子标题的长度不得低于4个字符');
+                    return
                 }
                 if (this.$store.getters.getContent==='') {
                     this.$Message.error('请输入内容！');
