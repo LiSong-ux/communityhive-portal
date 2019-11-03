@@ -2,23 +2,23 @@
     <div class="main">
         <div class="container">
             <div class="container_head">注册</div>
-            <Form class="container_form" :model="form" label-position="top">
-                <FormItem label="账号">
+            <Form class="container_form" ref="form" :model="form" :rules="ruleValidate" label-position="top">
+                <FormItem prop="account" label="账号">
                     <Input v-model="form.account" placeholder="请输入账号"/>
                 </FormItem>
-                <FormItem label="密码">
+                <FormItem prop="password" label="密码">
                     <Input type="password" v-model="form.password" placeholder="请输入密码"/>
                 </FormItem>
-                <FormItem label="确认密码">
+                <FormItem prop="checkPwd" label="确认密码">
                     <Input type="password" v-model="form.checkPwd" placeholder="请确认密码"/>
                 </FormItem>
-                <FormItem label="用户名">
+                <FormItem prop="username" label="用户名">
                     <Input v-model="form.username" placeholder="请输入用户名"/>
                 </FormItem>
-                <FormItem label="邮箱">
+                <FormItem prop="email" label="邮箱">
                     <Input v-model="form.email" placeholder="请输入邮箱"/>
                 </FormItem>
-                <FormItem>
+                <FormItem prop="gender" label="性别">
                     <RadioGroup v-model="form.gender">
                         <Radio label="0">女</Radio>
                         <Radio label="1">男</Radio>
@@ -26,7 +26,7 @@
                     </RadioGroup>
                 </FormItem>
                 <FormItem>
-                    <Button type="primary" @click="register">注册</Button>
+                    <Button type="primary" @click="register('form')">注册</Button>
                 </FormItem>
             </Form>
         </div>
@@ -36,6 +36,17 @@
 <script>
     export default {
         data() {
+            const validateAccount = (rule, value, callback) => {
+                let reg = /^\w+$/;
+                if (!reg.test(value)){
+                    callback(new Error('账号必须为英文字母、数字或下划线的组合'));
+                }
+            };
+            const validateCheckPwd = (rule, value, callback) => {
+                if (value !== this.form.password) {
+                    callback(new Error('两次输入的密码不匹配'));
+                }
+            };
             return {
                 form: {
                     account: '',
@@ -44,16 +55,51 @@
                     username: '',
                     email: '',
                     gender: '',
+                },
+                ruleValidate: {
+                    account: [
+                        { required: true, message: '请输入账号', trigger: 'blur' },
+                        { max: 32, message: '账号长度不允许超过32位', trigger: 'blur' },
+                        { min: 9, message: '账号长度不允许低于9位', trigger: 'blur' },
+                        { validator: validateAccount, trigger: 'blur' },
+                    ],
+                    password: [
+                        { required: true, message: '请输入密码', trigger: 'blur' },
+                        { min: 12, message: '密码长度不允许低于12位', trigger: 'blur' },
+                    ],
+                    checkPwd: [
+                        { required: true, message: '请确认密码', trigger: 'blur' },
+                        { validator: validateCheckPwd, trigger: 'blur' }
+                    ],
+                    username: [
+                        { required: true, message: '请输入用户名', trigger: 'blur' },
+                        { max: 24, message: '用户名长度不允许超过24位', trigger: 'blur' },
+                        { min: 2, message: '用户名长度不允许低于4位', trigger: 'blur' },
+                    ],
+                    email: [
+                        { required: true, message: '请输入邮箱', trigger: 'blur' },
+                        { type: 'email', message: '邮箱格式错误', trigger: 'blur' }
+                    ],
+                    gender: [
+                        { required: true, message: '请选择性别', trigger: 'change' }
+                    ],
                 }
             }
         },
         methods: {
-            register() {
+            register(name) {
+                this.$refs[name].validate((valid) => {
+                    if (!valid) {
+                        this.$Message.error('请填写表单');
+                        return
+                    }
+                })
                 let params = this.qs.stringify(this.form);
                 this.axios.post("/register", params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.instance('error', resp.msg);
+                        return
                     }
                     this.$store.commit('setUser', resp.data);
                     let content = '<p style="font-size: 16px">你现在已经是一个红领巾啦，快去发帖庆祝吧。。。</p>';
