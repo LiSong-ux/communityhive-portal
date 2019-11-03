@@ -10,7 +10,7 @@
                 <th align="center">最后发表</th>
             </tr>
             <tr class="tr_topic" v-for="(topic, index) in topicList" :key="index">
-                <td :class="index==topicList.length-1?'label':'label border_bottom'">
+                <td :class="index==topicList.length-1?'label':'label border_bottom'" align="center">
                     【<span>{{ topic.label }}</span>】
                 </td>
                 <td :class="index==topicList.length-1?'title':'title border_bottom'">

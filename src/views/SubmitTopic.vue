@@ -58,7 +58,13 @@
                     this.$Message.error('帖子标题的长度不得低于4个字符');
                     return
                 }
-                if (this.$store.getters.getContent==='') {
+                let validate = this.$store.getters.getContent;
+                let validateA = validate.replace(/ /g,'');
+                let validateB = validateA.replace(/<p>/g,'');
+                let validateC = validateB.replace(/<\/p>/g,'');
+                let validateD = validateC.replace(/&nbsp;/g,'');
+                let validateE = validateD.replace(/<br>/g,'');
+                if (validateE.length==0) {
                     this.$Message.error('请输入内容！');
                     return;
                 }

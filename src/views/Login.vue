@@ -34,6 +34,7 @@
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.instance('error', resp.msg);
+                        return;
                     }
                     this.$store.commit("setUser", resp.data);
                     this.$router.push("/");
