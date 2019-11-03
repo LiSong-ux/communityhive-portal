@@ -26,7 +26,7 @@
                     </RadioGroup>
                 </FormItem>
                 <FormItem>
-                    <Button type="primary" @click="register('form')">注册</Button>
+                    <Button type="primary" @click="handleSubmit('form')">注册</Button>
                 </FormItem>
             </Form>
         </div>
@@ -37,14 +37,18 @@
     export default {
         data() {
             const validateAccount = (rule, value, callback) => {
-                let reg = /^\w+$/;
+                let reg = /^[0-9a-zA-z-_]+$/;
                 if (!reg.test(value)){
-                    callback(new Error('账号必须为英文字母、数字或下划线的组合'));
+                    callback(new Error('账号必须为英文字母、数字、下划线或减号的组合'));
+                } else {
+                    callback();
                 }
             };
             const validateCheckPwd = (rule, value, callback) => {
                 if (value !== this.form.password) {
                     callback(new Error('两次输入的密码不匹配'));
+                } else {
+                    callback();
                 }
             };
             return {
@@ -87,13 +91,19 @@
             }
         },
         methods: {
-            register(name) {
+            handleSubmit (name) {
+                console.log(888888888)
                 this.$refs[name].validate((valid) => {
-                    if (!valid) {
-                        this.$Message.error('请填写表单');
-                        return
+                    if (valid) {
+                        console.log(1111111111)
+                        this.register();
+                    } else {
+                        console.log(2222222222)
+                        this.$Message.error('请填写表单!');
                     }
                 })
+            },
+            register() {
                 let params = this.qs.stringify(this.form);
                 this.axios.post("/register", params).then(response => {
                     let resp = response.data;
