@@ -13,7 +13,7 @@
                 </div>
                 <div class="topic_content" v-html="topic.content"></div>
                 <div class="reply_operate">
-                    <a @click="showModal">回复</a>
+                    <a @click="showModal(0)">回复</a>
                 </div>
             </div>
             <div class="reply" v-for="(reply, index) in replyList" :key="index">
@@ -44,7 +44,7 @@
             <Button class="submit_button" type="primary" size="large" @click="submitReply(0)">回复</Button>
         </div>
         <Modal class="modal_reply" v-model="modal" footer-hide width="1000">
-            <div class="reply_quote">
+            <div class="reply_quote" v-if="isShowQu">
                 <div class="quote_icon_e">
                     <div class="reply_quote_head">
                         <span class="reply_quote_info">{{ toQuote.username }} 发表于 {{ toQuote.submittime | dateFormat }}</span>
@@ -126,6 +126,7 @@
                 newReply: {},
                 toQuote: {},
                 modal: false,
+                isShowQu: true,
                 isClear: false,
             }
         },
@@ -155,7 +156,13 @@
                 } else {
                     this.$refs.editor_qu.getContent();
                 }
-                if (this.$store.getters.getContent==='') {
+                let validate = this.$store.getters.getContent;
+                let validateA = validate.replace(/ /g,'');
+                let validateB = validateA.replace(/<p>/g,'');
+                let validateC = validateB.replace(/<\/p>/g,'');
+                let validateD = validateC.replace(/&nbsp;/g,'');
+                let validateE = validateD.replace(/<br>/g,'');
+                if (validateE.length==0) {
                     this.$Message.error('请输入内容！');
                     return;
                 }
@@ -175,8 +182,13 @@
                 })
             },
             showModal(floor) {
+                if (floor==0) {
+                    this.isShowQu = false;
+                } else {
+                    this.isShowQu = true;
+                    this.toQuote = this.replyList[floor-1];
+                }
                 this.modal = true;
-                this.toQuote = this.replyList[floor-1];
             },
             instance(type, content) {
                 switch (type) {
