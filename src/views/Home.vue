@@ -30,6 +30,9 @@
                 </td>
             </tr>
         </table>
+        <div class="paging_box">
+            <Page :current="paging.currentPage" :page-size="paging.pageSize" :total="paging.total" show-elevator @on-change="changePage" />
+        </div>
     </div>
 </template>
 
@@ -39,6 +42,11 @@
         data() {
             return {
                 topicList: [],
+                paging: {
+                    currentPage: 1,
+                    pageSize: 10,
+                    total: 0,
+                },
             }
         },
         created: function(){
@@ -49,14 +57,19 @@
                 this.getTopicList();
             },
             getTopicList(){
-                this.axios.get('/topicList').then(response => {
+                this.axios.get('/topicList', {params: {page:this.paging.currentPage}}).then(response => {
                     let resp = response.data;
                     if (resp.status!=200) {
                         this.$Message.error(resp.msg);
                         return;
                     }
-                    this.topicList = resp.data;
+                    this.topicList = resp.data.topicList;
+                    this.paging.total = resp.data.topicCount;
                 });
+            },
+            changePage(page){
+                this.paging.currentPage = page;
+                this.getTopicList();
             },
         }
     }
@@ -68,6 +81,7 @@
         padding: 0px 20px 20px 20px;
         border-radius: 10px;
         background-color: #fff;
+        overflow: hidden;
     }
     .table {
         width: 100%;
@@ -137,5 +151,10 @@
 
     .border_bottom {
         border-bottom:1px solid #999;
+    }
+
+    .paging_box {
+        float: right;
+        margin: 20px 0px 0px 0px;
     }
 </style>
