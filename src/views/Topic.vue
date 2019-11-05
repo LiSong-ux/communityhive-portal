@@ -84,7 +84,12 @@
               this.getTopic();
             },
             getTopic(){
-                this.axios.get('/topic', {params:{id:this.$route.query.id}}).then(response => {
+                let initParams = {
+                    'id': this.$route.query.id,
+                    'terminal': navigator.userAgent
+                };
+                let params = this.qs.stringify(initParams)
+                this.axios.post('/topic', params).then(response => {
                    let resp = response.data;
                    if (resp.status!=200) {
                        this.$Message.error(resp.msg);

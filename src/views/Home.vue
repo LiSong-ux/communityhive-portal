@@ -31,7 +31,7 @@
             </tr>
         </table>
         <div class="paging_box">
-            <Page :current="paging.currentPage" :page-size="paging.pageSize" :total="paging.total" show-elevator @on-change="changePage" />
+            <Page v-if="this.paging.total>0" :current="paging.currentPage" :page-size="paging.pageSize" :total="paging.total" show-elevator @on-change="changePage" />
         </div>
     </div>
 </template>
@@ -61,7 +61,10 @@
                 this.getTopicList();
             },
             getTopicList(){
-                let initParams = {'page':this.paging.currentPage, 'terminal':navigator.userAgent};
+                let initParams = {
+                    'page': this.paging.currentPage,
+                    'terminal': navigator.userAgent
+                };
                 let params = this.qs.stringify(initParams);
                 this.axios.post('/topicList', params).then(response => {
                     let resp = response.data;

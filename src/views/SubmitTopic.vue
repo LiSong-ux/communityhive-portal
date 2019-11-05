@@ -29,7 +29,8 @@
                 topic: {
                     label: '',
                     title: '',
-                    content: ''
+                    content: '',
+                    terminal: ''
                 }
             }
         },
@@ -69,6 +70,7 @@
                     return;
                 }
                 this.topic.content = this.$store.getters.getContent;
+                this.topic.terminal = navigator.userAgent;
                 let params = this.qs.stringify(this.topic);
                 this.axios.post('/submitTopic', params).then(response => {
                     let resp = response.data;
