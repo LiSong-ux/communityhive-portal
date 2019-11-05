@@ -76,54 +76,55 @@
                 isClear: false,
             }
         },
-        created: function(){
+        created: function () {
             this.init();
         },
         methods: {
-            init(){
-              this.getTopic();
+            init() {
+                this.getTopic();
             },
-            getTopic(){
+            getTopic() {
                 let initParams = {
                     'id': this.$route.query.id,
                     'terminal': navigator.userAgent
                 };
                 let params = this.qs.stringify(initParams)
                 this.axios.post('/topic', params).then(response => {
-                   let resp = response.data;
-                   if (resp.status!=200) {
-                       this.$Message.error(resp.msg);
-                       return;
-                   }
-                   this.topic = resp.data.topic;
-                   this.replyList = resp.data.replyList;
-                   this.isClear = false;
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.$Message.error(resp.msg);
+                        return;
+                    }
+                    this.topic = resp.data.topic;
+                    this.replyList = resp.data.replyList;
+                    this.isClear = false;
                 });
             },
             submitReply(num) {
-                if (num==0){
+                if (num == 0) {
                     this.$refs.editor.getContent();
                     this.quoteFloor = 0;
                 } else {
                     this.$refs.editor_qu.getContent();
                 }
                 let validate = this.$store.getters.getContent;
-                let validateA = validate.replace(/ /g,'');
-                let validateB = validateA.replace(/<p>/g,'');
-                let validateC = validateB.replace(/<\/p>/g,'');
-                let validateD = validateC.replace(/&nbsp;/g,'');
-                let validateE = validateD.replace(/<br>/g,'');
-                if (validateE.length==0) {
+                let validateA = validate.replace(/ /g, '');
+                let validateB = validateA.replace(/<p>/g, '');
+                let validateC = validateB.replace(/<\/p>/g, '');
+                let validateD = validateC.replace(/&nbsp;/g, '');
+                let validateE = validateD.replace(/<br>/g, '');
+                if (validateE.length == 0) {
                     this.$Message.error('请输入内容！');
                     return;
                 }
                 this.newReply.topicId = this.$route.query.id;
                 this.newReply.quote = this.quoteFloor;
                 this.newReply.content = this.$store.getters.getContent;
+                this.newReply.terminal = navigator.userAgent;
                 let params = this.qs.stringify(this.newReply);
                 this.axios.post('/submitReply', params).then(response => {
                     let resp = response.data;
-                    if (resp.status!=200){
+                    if (resp.status != 200) {
                         this.instance('error', resp.msg);
                     }
                     this.isClear = true;
@@ -133,11 +134,11 @@
                 })
             },
             showModal(floor) {
-                if (floor==0) {
+                if (floor == 0) {
                     this.isShowQu = false;
                 } else {
                     this.isShowQu = true;
-                    this.toQuote = this.replyList[floor-1];
+                    this.toQuote = this.replyList[floor - 1];
                 }
                 this.modal = true;
             },
@@ -348,6 +349,7 @@
     .modal_reply /deep/ .ivu-modal-wrap {
         z-index: 11010 !important;
     }
+
     .modal_reply_overflow {
         width: 800px;
         height: 40px;
@@ -357,6 +359,7 @@
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
     }
+
     .submit_button {
         width: 120px;
     }

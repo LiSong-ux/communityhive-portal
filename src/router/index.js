@@ -9,37 +9,37 @@ import Topic from '../views/Topic'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: Home
-  },
-  {
-    path: '/toLogin',
-    component: Login
-  },
-  {
-    path: '/toRegister',
-    component: Register
-  },
-  {
-    path: '/toSubmitTopic',
-    component: SubmitTopic
-  },
-  {
-    path: '/toTopic',
-    component: Topic
-  },
-  {
-    path: '/about',
-    name: 'about',
-  },
+    {
+        path: '/',
+        name: 'home',
+        component: Home
+    },
+    {
+        path: '/toLogin',
+        component: Login
+    },
+    {
+        path: '/toRegister',
+        component: Register
+    },
+    {
+        path: '/toSubmitTopic',
+        component: SubmitTopic
+    },
+    {
+        path: '/toTopic',
+        component: Topic
+    },
+    {
+        path: '/about',
+        name: 'about',
+    },
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes
 })
 
 export default router

@@ -38,7 +38,7 @@
         data() {
             const validateAccount = (rule, value, callback) => {
                 let reg = /^[0-9a-zA-z-_]+$/;
-                if (!reg.test(value)){
+                if (!reg.test(value)) {
                     callback(new Error('账号必须为英文字母、数字、下划线或减号的组合'));
                 } else {
                     callback();
@@ -63,36 +63,36 @@
                 },
                 ruleValidate: {
                     account: [
-                        { required: true, message: '请输入账号', trigger: 'blur' },
-                        { max: 32, message: '账号长度不允许超过32位', trigger: 'blur' },
-                        { min: 9, message: '账号长度不允许低于9位', trigger: 'blur' },
-                        { validator: validateAccount, trigger: 'blur' },
+                        {required: true, message: '请输入账号', trigger: 'blur'},
+                        {max: 32, message: '账号长度不允许超过32位', trigger: 'blur'},
+                        {min: 9, message: '账号长度不允许低于9位', trigger: 'blur'},
+                        {validator: validateAccount, trigger: 'blur'},
                     ],
                     password: [
-                        { required: true, message: '请输入密码', trigger: 'blur' },
-                        { min: 12, message: '密码长度不允许低于12位', trigger: 'blur' },
+                        {required: true, message: '请输入密码', trigger: 'blur'},
+                        {min: 12, message: '密码长度不允许低于12位', trigger: 'blur'},
                     ],
                     checkPwd: [
-                        { required: true, message: '请确认密码', trigger: 'blur' },
-                        { validator: validateCheckPwd, trigger: 'blur' }
+                        {required: true, message: '请确认密码', trigger: 'blur'},
+                        {validator: validateCheckPwd, trigger: 'blur'}
                     ],
                     username: [
-                        { required: true, message: '请输入用户名', trigger: 'blur' },
-                        { max: 24, message: '用户名长度不允许超过24位', trigger: 'blur' },
-                        { min: 2, message: '用户名长度不允许低于4位', trigger: 'blur' },
+                        {required: true, message: '请输入用户名', trigger: 'blur'},
+                        {max: 24, message: '用户名长度不允许超过24位', trigger: 'blur'},
+                        {min: 2, message: '用户名长度不允许低于4位', trigger: 'blur'},
                     ],
                     email: [
-                        { required: true, message: '请输入邮箱', trigger: 'blur' },
-                        { type: 'email', message: '邮箱格式错误', trigger: 'blur' }
+                        {required: true, message: '请输入邮箱', trigger: 'blur'},
+                        {type: 'email', message: '邮箱格式错误', trigger: 'blur'}
                     ],
                     gender: [
-                        { required: true, message: '请选择性别', trigger: 'change' }
+                        {required: true, message: '请选择性别', trigger: 'change'}
                     ],
                 }
             }
         },
         methods: {
-            handleSubmit (name) {
+            handleSubmit(name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
                         this.register();

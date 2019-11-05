@@ -31,7 +31,8 @@
             </tr>
         </table>
         <div class="paging_box">
-            <Page v-if="this.paging.total>0" :current="paging.currentPage" :page-size="paging.pageSize" :total="paging.total" show-elevator @on-change="changePage" />
+            <Page v-if="this.paging.total>0" :current="paging.currentPage" :page-size="paging.pageSize"
+                  :total="paging.total" show-elevator @on-change="changePage"/>
         </div>
     </div>
 </template>
@@ -47,20 +48,20 @@
                     pageSize: 10,
                     total: 0,
                 },
-                form:{
+                form: {
                     page: 1,
                     terminal: ''
                 }
             }
         },
-        created: function(){
-          this.init();
+        created: function () {
+            this.init();
         },
         methods: {
-            init(){
+            init() {
                 this.getTopicList();
             },
-            getTopicList(){
+            getTopicList() {
                 let initParams = {
                     'page': this.paging.currentPage,
                     'terminal': navigator.userAgent
@@ -68,7 +69,7 @@
                 let params = this.qs.stringify(initParams);
                 this.axios.post('/topicList', params).then(response => {
                     let resp = response.data;
-                    if (resp.status!=200) {
+                    if (resp.status != 200) {
                         this.$Message.error(resp.msg);
                         return;
                     }
@@ -76,7 +77,7 @@
                     this.paging.total = resp.data.topicCount;
                 });
             },
-            changePage(page){
+            changePage(page) {
                 this.paging.currentPage = page;
                 this.getTopicList();
             },
@@ -92,15 +93,18 @@
         background-color: #fff;
         overflow: hidden;
     }
+
     .table {
         width: 100%;
-        border-collapse:collapse;
+        border-collapse: collapse;
     }
+
     .tr_head {
         height: 40px;
         font-size: 1.2em;
         font-weight: bold;
     }
+
     /*.th_title {
         border-left: 6px solid dodgerblue;
     }*/
@@ -108,58 +112,73 @@
         padding-left: 15px;
         border-left: 6px solid dodgerblue;
     }
+
     .tr_topic {
         height: 60px;
     }
+
     .label {
         width: 8%;
+
         span {
             color: #ff78f2;
         }
     }
+
     .title {
         width: 52%;
         font-size: 1.2em;
         font-weight: bold;
+
         a {
             color: #515a6e;
         }
+
         a:hover {
             color: #2d8cf0;
         }
     }
+
     .author {
         text-align: center;
+
         h3 {
             color: #7673ff;
         }
+
         p {
             color: #ffa41e;
         }
     }
+
     .reply_view {
         text-align: center;
         width: 8%;
         font-size: 1.1em;
+
         h3 {
             color: cadetblue;
         }
+
         p {
             color: steelblue;
         }
     }
+
     .latestReply {
         text-align: center;
+
         h3 {
             color: #7673ff;
         }
+
         p {
             color: #ffa41e;
         }
     }
 
     .border_bottom {
-        border-bottom:1px solid #999;
+        border-bottom: 1px solid #999;
     }
 
     .paging_box {
