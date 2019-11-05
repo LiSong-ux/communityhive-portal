@@ -70,7 +70,7 @@
                     ],
                     password: [
                         {required: true, message: '请输入密码', trigger: 'blur'},
-                        {min: 12, message: '密码长度不允许低于12位', trigger: 'blur'},
+                        {min: 9, message: '密码长度不允许低于9位', trigger: 'blur'},
                     ],
                     checkPwd: [
                         {required: true, message: '请确认密码', trigger: 'blur'},
@@ -79,7 +79,7 @@
                     username: [
                         {required: true, message: '请输入用户名', trigger: 'blur'},
                         {max: 24, message: '用户名长度不允许超过24位', trigger: 'blur'},
-                        {min: 2, message: '用户名长度不允许低于4位', trigger: 'blur'},
+                        {min: 2, message: '用户名长度不允许低于2位', trigger: 'blur'},
                     ],
                     email: [
                         {required: true, message: '请输入邮箱', trigger: 'blur'},
