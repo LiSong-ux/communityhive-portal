@@ -47,6 +47,7 @@
                     pageSize: 10,
                     total: 0,
                 },
+                terminal: '',
             }
         },
         created: function(){

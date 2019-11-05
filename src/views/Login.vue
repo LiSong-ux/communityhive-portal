@@ -24,11 +24,13 @@
                 form: {
                     account: '',
                     password: '',
+                    terminal: '',
                 }
             }
         },
         methods: {
             login() {
+                this.form.terminal = navigator.userAgent;
                 let params = this.qs.stringify(this.form);
                 this.axios.post("/login", params).then(response => {
                     let resp = response.data;

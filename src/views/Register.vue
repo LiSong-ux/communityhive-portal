@@ -59,6 +59,7 @@
                     username: '',
                     email: '',
                     gender: '',
+                    terminal: '',
                 },
                 ruleValidate: {
                     account: [
@@ -92,18 +93,16 @@
         },
         methods: {
             handleSubmit (name) {
-                console.log(888888888)
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        console.log(1111111111)
                         this.register();
                     } else {
-                        console.log(2222222222)
                         this.$Message.error('请填写表单!');
                     }
                 })
             },
             register() {
+                this.form.terminal = navigator.userAgent;
                 let params = this.qs.stringify(this.form);
                 this.axios.post("/register", params).then(response => {
                     let resp = response.data;
