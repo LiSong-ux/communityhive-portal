@@ -47,7 +47,10 @@
                     pageSize: 10,
                     total: 0,
                 },
-                terminal: '',
+                form:{
+                    page: 1,
+                    terminal: ''
+                }
             }
         },
         created: function(){
@@ -58,7 +61,9 @@
                 this.getTopicList();
             },
             getTopicList(){
-                this.axios.get('/topicList', {params: {page:this.paging.currentPage}}).then(response => {
+                let initParams = {'page':this.paging.currentPage, 'terminal':navigator.userAgent};
+                let params = this.qs.stringify(initParams);
+                this.axios.post('/topicList', params).then(response => {
                     let resp = response.data;
                     if (resp.status!=200) {
                         this.$Message.error(resp.msg);
