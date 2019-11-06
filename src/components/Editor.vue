@@ -2,13 +2,12 @@
     <div>
         <div class="edit_container" ref="editor"></div>
         <!--<button v-on:click="getContent">查看内容</button>-->
-        <!--<Button class="submit_button" type="primary" size="large" v-on:click="getContent">{{ label }}</Button>-->
     </div>
 </template>
 
 <script>
-    import E from 'wangeditor'
-
+    import E from 'wangeditor';
+    import xss from 'xss';
     export default {
         name: 'editor',
         props: {
@@ -39,7 +38,8 @@
         mounted() {
             this.editor = new E(this.$refs.editor)
             this.editor.customConfig.onchange = (html) => {
-                this.editorContent = html
+                //执行xss过滤
+                this.editorContent = xss(html);
             };
             this.editor.create();
         }
