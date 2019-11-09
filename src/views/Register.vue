@@ -15,11 +15,18 @@
                 <FormItem prop="username" label="用户名">
                     <Input v-model="form.username" placeholder="请输入用户名"/>
                 </FormItem>
-                <FormItem prop="mobile" label="手机号">
-                    <Input v-model="form.mobile" placeholder="请输入手机号"/>
-                </FormItem>
+                <!--<FormItem prop="mobile" label="手机号">-->
+                    <!--<Input v-model="form.mobile" placeholder="请输入手机号"/>-->
+                <!--</FormItem>-->
                 <FormItem prop="email" label="邮箱">
                     <Input v-model="form.email" placeholder="请输入邮箱"/>
+                </FormItem>
+                <FormItem prop="emailCode" label="邮箱验证码">
+                    <Input>
+                        <Button slot="append" class="emailCode_button">
+                            <span>获取验证码</span>
+                        </Button>
+                    </Input>
                 </FormItem>
                 <FormItem prop="gender" label="性别">
                     <RadioGroup v-model="form.gender">
@@ -29,7 +36,7 @@
                     </RadioGroup>
                 </FormItem>
                 <FormItem>
-                    <Button type="primary" @click="handleSubmit('form')">注册</Button>
+                    <Button class="form_button" type="primary" @click="handleSubmit('form')">注册</Button>
                 </FormItem>
             </Form>
         </div>
@@ -54,21 +61,21 @@
                     callback();
                 }
             };
-            const validateMobile = (rule, value, callback) => {
-                let reg = /^1[34578]\d{9}$/;
-                if (!reg.test(value)) {
-                    callback(new Error('手机号格式不正确'));
-                } else {
-                    callback();
-                }
-            };
+            // const validateMobile = (rule, value, callback) => {
+            //     let reg = /^1[34578]\d{9}$/;
+            //     if (!reg.test(value)) {
+            //         callback(new Error('手机号格式不正确'));
+            //     } else {
+            //         callback();
+            //     }
+            // };
             return {
                 form: {
                     account: '',
                     password: '',
                     checkPwd: '',
                     username: '',
-                    mobile: '',
+                    // mobile: '',
                     email: '',
                     gender: '',
                     terminal: '',
@@ -93,10 +100,10 @@
                         {max: 24, message: '用户名长度不允许超过24位', trigger: 'blur'},
                         {min: 2, message: '用户名长度不允许低于2位', trigger: 'blur'},
                     ],
-                    mobile: [
-                        {required: true, message: '请输入手机号', trigger: 'blur'},
-                        {validator: validateMobile, trigger: 'blur'}
-                    ],
+                    // mobile: [
+                    //     {required: true, message: '请输入手机号', trigger: 'blur'},
+                    //     {validator: validateMobile, trigger: 'blur'}
+                    // ],
                     email: [
                         {required: true, message: '请输入邮箱', trigger: 'blur'},
                         {type: 'email', message: '邮箱格式错误', trigger: 'blur'}
@@ -179,9 +186,21 @@
     .container_form {
         width: 80%;
         margin: 30px auto;
+    }
 
-        Button {
-            width: 100%;
+    .form_button {
+        width: 100%;
+    }
+
+    .emailCode_button {
+        width: 100px;
+    }
+
+    .emailCode_button:hover {
+        width: 100px;
+        span {
+            color: #f0ac19;
         }
     }
+
 </style>
