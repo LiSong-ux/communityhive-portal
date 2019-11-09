@@ -22,7 +22,7 @@
                     <Input v-model="form.email" placeholder="请输入邮箱"/>
                 </FormItem>
                 <FormItem prop="emailCode" label="邮箱验证码">
-                    <Input>
+                    <Input v-model="form.emailCode" placeholder="请输入邮箱验证码">
                         <Button slot="append" class="emailCode_button">
                             <span>获取验证码</span>
                         </Button>
@@ -69,6 +69,15 @@
             //         callback();
             //     }
             // };
+            // const validateEmailCode = (rule, value, callback) => {
+            //     if (value == '') {
+            //         callback(new Error('请输入邮箱验证码'));
+            //     } else if (value.length != 6) {
+            //         callback(new Error('验证码长度为6位'));
+            //     } else {
+            //         callback();
+            //     }
+            // };
             return {
                 form: {
                     account: '',
@@ -77,6 +86,7 @@
                     username: '',
                     // mobile: '',
                     email: '',
+                    emailCode: '',
                     gender: '',
                     terminal: '',
                 },
@@ -107,6 +117,10 @@
                     email: [
                         {required: true, message: '请输入邮箱', trigger: 'blur'},
                         {type: 'email', message: '邮箱格式错误', trigger: 'blur'}
+                    ],
+                    emailCode: [
+                        {required: true, message: '请输入邮箱验证码', trigger: 'blur'},
+                        {min: 6, max: 6, message: '验证码长度为6位', trigger: 'blur'}
                     ],
                     gender: [
                         {required: true, message: '请选择性别', trigger: 'change'}
