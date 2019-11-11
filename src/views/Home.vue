@@ -45,7 +45,7 @@
                 topicList: [],
                 paging: {
                     currentPage: 1,
-                    pageSize: 10,
+                    pageSize: 45,
                     total: 0,
                 },
                 form: {

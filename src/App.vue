@@ -3,7 +3,7 @@
         <div class="header">
             <div class="logo" :style="{ width: logoWidth + 'px' }">
                 <router-link to="/">
-                    <h2>啊哈哈哈哈啊</h2>
+                    <h2>望月社区</h2>
                 </router-link>
             </div>
             <div class="nav">
