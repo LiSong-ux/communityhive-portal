@@ -148,6 +148,11 @@
                 })
             },
             getEmailCode() {
+                let reg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+                if (!reg.test(this.form.email)) {
+                    this.$Message.error('邮箱格式错误！')
+                    return;
+                }
                 this.buttonShow = 1;
                 let params = this.qs.stringify({email: this.form.email});
                 this.axios.post("/getEmailCode", params).then(response => {
