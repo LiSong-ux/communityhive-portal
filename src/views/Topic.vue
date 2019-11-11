@@ -81,7 +81,7 @@
                 isClear: false,
                 paging: {
                     currentPage: 1,
-                    pageSize: 10,
+                    pageSize: 50,
                     total: 0,
                 },
             }
@@ -99,7 +99,7 @@
                     'page': this.paging.currentPage,
                     'terminal': navigator.userAgent
                 };
-                let params = this.qs.stringify(initParams)
+                let params = this.qs.stringify(initParams);
                 this.axios.post('/topic', params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
