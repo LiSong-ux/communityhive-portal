@@ -71,6 +71,7 @@
                 replyList: [],
                 newReply: {},
                 toQuote: {},
+                quoteFloor: 0,
                 modal: false,
                 isShowQu: true,
                 isClear: false,
@@ -103,7 +104,6 @@
             submitReply(num) {
                 if (num == 0) {
                     this.$refs.editor.getContent();
-                    this.quoteFloor = 0;
                 } else {
                     this.$refs.editor_qu.getContent();
                 }
@@ -139,6 +139,7 @@
                 } else {
                     this.isShowQu = true;
                     this.toQuote = this.replyList[floor - 1];
+                    this.quoteFloor = floor;
                 }
                 this.modal = true;
             },
