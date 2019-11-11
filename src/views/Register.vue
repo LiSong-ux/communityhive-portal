@@ -23,8 +23,14 @@
                 </FormItem>
                 <FormItem prop="emailCode" label="邮箱验证码">
                     <Input v-model="form.emailCode" placeholder="请输入邮箱验证码">
-                        <Button slot="append" class="emailCode_button">
+                        <Button slot="append" class="emailCode_button" v-if="buttonShow==0" @click="getEmailCode">
                             <span>获取验证码</span>
+                        </Button>
+                        <Button slot="append" v-else-if="buttonShow==1">
+                            <span>正在发送验证码</span>
+                        </Button>
+                        <Button slot="append" v-else>
+                            <span>{{timeCount}}s 后获取验证码</span>
                         </Button>
                     </Input>
                 </FormItem>
@@ -125,7 +131,9 @@
                     gender: [
                         {required: true, message: '请选择性别', trigger: 'change'}
                     ],
-                }
+                },
+                buttonShow: 0,
+                timeCount: 120,
             }
         },
         methods: {
@@ -138,6 +146,20 @@
                     }
                 })
             },
+            getEmailCode(){
+                this.buttonShow = 1;
+                let params = this.qs.stringify({email:this.form.email});
+                this.axios.post("/getEmailCode", params).then(response => {
+                    let resp = response.data;
+                    if (resp.status!=200){
+                        this.instance('error', resp.msg);
+                        this.buttonShow = 0;
+                        return;
+                    }
+                    this.$Message.success('验证码发送成功！');
+                    this.buttonShow = 2;
+                })
+            },
             register() {
                 this.form.terminal = navigator.userAgent;
                 let params = this.qs.stringify(this.form);
@@ -145,7 +167,7 @@
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.instance('error', resp.msg);
-                        return
+                        return;
                     }
                     this.$store.commit('setUser', resp.data);
                     let content = '<p style="font-size: 16px">你现在已经是一个红领巾啦，快去发帖庆祝吧。。。</p>';
