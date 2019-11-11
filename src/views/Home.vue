@@ -31,7 +31,7 @@
             </tr>
         </table>
         <div class="paging_box">
-            <Page v-if="this.paging.total>0" :current="paging.currentPage" :page-size="paging.pageSize"
+            <Page v-if="paging.total>0" :current="paging.currentPage" :page-size="paging.pageSize"
                   :total="paging.total" show-elevator @on-change="changePage"/>
         </div>
     </div>

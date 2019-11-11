@@ -38,6 +38,10 @@
                     <a @click="showModal(reply.floor)">回复</a>
                 </div>
             </div>
+            <div class="paging_box">
+                <Page v-if="paging.total>0" :current="paging.currentPage" :page-size="paging.pageSize"
+                      :total="paging.total" show-elevator @on-change="changePage"/>
+            </div>
         </div>
         <div class="submit_reply">
             <editor ref="editor" :isClear="isClear"></editor>
@@ -75,6 +79,11 @@
                 modal: false,
                 isShowQu: true,
                 isClear: false,
+                paging: {
+                    currentPage: 1,
+                    pageSize: 10,
+                    total: 0,
+                },
             }
         },
         created: function () {
@@ -87,6 +96,7 @@
             getTopic() {
                 let initParams = {
                     'id': this.$route.query.id,
+                    'page': this.paging.currentPage,
                     'terminal': navigator.userAgent
                 };
                 let params = this.qs.stringify(initParams)
@@ -98,6 +108,7 @@
                     }
                     this.topic = resp.data.topic;
                     this.replyList = resp.data.replyList;
+                    this.paging.total = resp.data.replyCount;
                     this.isClear = false;
                 });
             },
@@ -143,6 +154,10 @@
                 }
                 this.modal = true;
             },
+            changePage(page) {
+                this.paging.currentPage = page;
+                this.getTopic();
+            },
             instance(type, content) {
                 switch (type) {
                     case 'success':
@@ -178,6 +193,7 @@
         padding: 30px 0px;
         border-radius: 10px;
         background-color: #fff;
+        overflow: hidden;
     }
 
 
@@ -363,5 +379,10 @@
 
     .submit_button {
         width: 120px;
+    }
+
+    .paging_box {
+        float: right;
+        margin: 0px 45px 0px 0px;
     }
 </style>
