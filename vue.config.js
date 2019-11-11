@@ -13,4 +13,4 @@ module.exports = {
     proxy: null, // 设置代理
     before: app => {}
   },
-}
+};
