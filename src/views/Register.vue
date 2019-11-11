@@ -16,7 +16,7 @@
                     <Input v-model="form.username" placeholder="请输入用户名"/>
                 </FormItem>
                 <!--<FormItem prop="mobile" label="手机号">-->
-                    <!--<Input v-model="form.mobile" placeholder="请输入手机号"/>-->
+                <!--<Input v-model="form.mobile" placeholder="请输入手机号"/>-->
                 <!--</FormItem>-->
                 <FormItem prop="email" label="邮箱">
                     <Input v-model="form.email" placeholder="请输入邮箱"/>
@@ -133,7 +133,8 @@
                     ],
                 },
                 buttonShow: 0,
-                timeCount: 120,
+                timer: null,
+                timeCount: 600,
             }
         },
         methods: {
@@ -142,22 +143,32 @@
                     if (valid) {
                         this.register();
                     } else {
-                        this.$Message.error('请填写表单!');
+                        this.$Message.error('请正确填写表单!');
                     }
                 })
             },
-            getEmailCode(){
+            getEmailCode() {
                 this.buttonShow = 1;
-                let params = this.qs.stringify({email:this.form.email});
+                let params = this.qs.stringify({email: this.form.email});
                 this.axios.post("/getEmailCode", params).then(response => {
                     let resp = response.data;
-                    if (resp.status!=200){
+                    if (resp.status != 200) {
                         this.instance('error', resp.msg);
                         this.buttonShow = 0;
                         return;
                     }
                     this.$Message.success('验证码发送成功！');
                     this.buttonShow = 2;
+                    const TIME_COUNT = 600;
+                    this.timer = setInterval(() => {
+                        if (this.timeCount > 0 && this.timeCount <= TIME_COUNT) {
+                            this.timeCount--
+                        } else {
+                            this.buttonShow = 0;
+                            clearInterval(this.timer);
+                            this.timer = null;
+                        }
+                    }, 1000);
                 })
             },
             register() {
@@ -234,6 +245,7 @@
 
     .emailCode_button:hover {
         width: 100px;
+
         span {
             color: #f0ac19;
         }
