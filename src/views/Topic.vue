@@ -16,14 +16,14 @@
                     <a @click="showModal(0)">回复</a>
                 </div>
             </div>
-            <div class="reply" v-for="(reply, index) in replyList" :key="index">
+            <div class="reply" v-for="(reply, index) in pageReplyList" :key="index">
                 <div class="reply_head">
                     <div class="reply_author">{{ reply.username }}</div>
                     <div class="reply_time">发表于 {{ reply.submittime | dateFormat }}</div>
                     <div class="floor">{{ reply.floor }}楼</div>
                 </div>
                 <div class="reply_content">
-                    <div class="reply_quote" v-show="reply.quote!=0">
+                    <div class="reply_quote" v-if="reply.quote!=0">
                         <div class="quote_icon_e">
                             <div class="reply_quote_head">
                                 <span class="reply_quote_info">{{ replyList[reply.quoteIndex].username }} 发表于 {{ replyList[reply.quoteIndex].submittime | dateFormat }}</span>
@@ -73,6 +73,7 @@
             return {
                 topic: {},
                 replyList: [],
+                pageReplyList: [],
                 newReply: {},
                 toQuote: {},
                 quoteFloor: 0,
@@ -107,7 +108,18 @@
                         return;
                     }
                     this.topic = resp.data.topic;
-                    this.replyList = resp.data.replyList;
+                    this.pageReplyList = resp.data.replyList;
+                    let lastIndex;
+                    if (this.replyList.length == 0) {
+                        lastIndex = 0;
+                    } else {
+                        lastIndex = this.replyList.length - 1;
+                    }
+                    if (this.replyList.length == 0 || this.replyList[lastIndex].floor < resp.data.replyList[0].floor) {
+                        for (let i = 0; i < resp.data.replyList.length; i++) {
+                            this.replyList.push(resp.data.replyList[i]);
+                        }
+                    }
                     this.paging.total = resp.data.replyCount;
                     this.isClear = false;
                 });
