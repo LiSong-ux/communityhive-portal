@@ -109,12 +109,7 @@
                     }
                     this.topic = resp.data.topic;
                     this.pageReplyList = resp.data.replyList;
-                    let lastIndex;
-                    if (this.replyList.length == 0) {
-                        lastIndex = 0;
-                    } else {
-                        lastIndex = this.replyList.length - 1;
-                    }
+                    let lastIndex = this.replyList.length - 1;
                     if (this.replyList.length == 0 || this.replyList[lastIndex].floor < resp.data.replyList[0].floor) {
                         for (let i = 0; i < resp.data.replyList.length; i++) {
                             this.replyList.push(resp.data.replyList[i]);
