@@ -3,7 +3,7 @@
         <div class="header">
             <div class="logo" :style="{ width: logoWidth + 'px' }">
                 <router-link to="/">
-                    <h2>望月社区</h2>
+                    <h1>望月社区</h1>
                 </router-link>
             </div>
             <div class="nav">
@@ -130,8 +130,9 @@
     .logo {
         float: left;
         color: #fff;
+        font-family: YouYuan;
         text-align: center;
-        margin-top: 9px;
+        margin-top: 3px;
     }
 
     .nav {
