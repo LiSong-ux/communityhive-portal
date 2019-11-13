@@ -109,10 +109,19 @@
                     }
                     this.topic = resp.data.topic;
                     this.pageReplyList = resp.data.replyList;
-                    let lastIndex = this.replyList.length - 1;
-                    if (this.replyList.length == 0 || this.replyList[lastIndex].floor < resp.data.replyList[0].floor) {
+                    let lastIndex_f = this.replyList.length - 1;
+                    if (this.replyList.length == 0 || this.replyList[lastIndex_f].floor < resp.data.replyList[0].floor) {
                         for (let i = 0; i < resp.data.replyList.length; i++) {
                             this.replyList.push(resp.data.replyList[i]);
+                        }
+                    }
+                    let lastIndex_s = this.replyList.length - 1;
+                    let respLastIndex = resp.data.replyList.length - 1;
+                    if (this.replyList.length != 0 && this.replyList[lastIndex_s].floor >= resp.data.replyList[0].floor && this.replyList[lastIndex_s].floor < resp.data.replyList[respLastIndex].floor) {
+                        for (let i = 0; i < resp.data.replyList.length; i++) {
+                            if (this.replyList[lastIndex_s].floor < resp.data.replyList[i].floor) {
+                                this.replyList.push(resp.data.replyList[i]);
+                            }
                         }
                     }
                     this.paging.total = resp.data.replyCount;
