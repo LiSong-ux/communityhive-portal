@@ -19,10 +19,9 @@ Vue.filter('dateFormat', function (tick) {
     return moment(tick).format("YYYY-MM-DD HH:mm:ss");
 });
 
-axios.defaults.baseURL = 'http://localhost:8083/communityhive_server_war_exploded';
+axios.defaults.baseURL = 'http://154.221.26.59:8080/communityhive-server';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.defaults.withCredentials = true;
-
 
 new Vue({
     router,
