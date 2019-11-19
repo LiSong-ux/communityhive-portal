@@ -13,4 +13,13 @@ module.exports = {
     proxy: null, // 设置代理
     before: app => {}
   },
+  pwa: {
+    iconPaths: {
+      favicon32     : 'faviconfc.ico',
+      favicon16     : 'faviconfc.ico',
+      appleTouchIcon: 'faviconfc.ico',
+      maskIcon      : 'faviconfc.ico',
+      msTileImage   : 'faviconfc.ico'
+    }
+  },
 };
