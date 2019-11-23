@@ -67,7 +67,7 @@
                 |
                 <router-link to="/">侵权与投诉</router-link>
             </div>
-            <div class="website">Copyright © 2019 啊哈哈哈哈哈啊</div>
+            <div class="website">Copyright © 2019 望月社区</div>
         </div>
     </div>
 </template>
@@ -95,6 +95,9 @@
             }
         },
         created: function () {
+            if (this.isMobile()) {
+                window.location.href = "http://inhive.net/mobile";
+            }
             //在页面加载时读取sessionStorage里的状态信息
             if (sessionStorage.getItem("store")) {
                 this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(sessionStorage.getItem("store"))));
@@ -106,6 +109,12 @@
             });
         },
         methods: {
+            isMobile() {
+                let flag = navigator.userAgent.match(
+                    /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+                );
+                return flag;
+            },
             toLogin() {
                 this.$router.push('/toLogin');
             },
