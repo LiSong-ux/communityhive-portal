@@ -8,37 +8,14 @@
             </div>
             <div class="nav">
                 <Menu class="menu" mode="horizontal" :theme="theme" :active-name="selected">
-                    <router-link to="/">
-                        <MenuItem name="1">
-                            <Icon type="md-home" size="18"/>
-                            <span>首页</span>
-                        </MenuItem>
-                    </router-link>
-                    <router-link to="/toSubmitTopic">
-                        <MenuItem name="2">
-                            <Icon type="ios-create" ize="18"/>
-                            <span>发表帖子</span>
-                        </MenuItem>
-                    </router-link>
-                    <!-- <Submenu name="3">
-                        <template slot="title">
-                            <Icon type="ios-stats"/>
-                            统计分析
-                        </template>
-                        <MenuGroup title="使用">
-                            <MenuItem name="3-1">新增和启动</MenuItem>
-                            <MenuItem name="3-2">活跃分析</MenuItem>
-                            <MenuItem name="3-3">时段分析</MenuItem>
-                        </MenuGroup>
-                        <MenuGroup title="留存">
-                            <MenuItem name="3-4">用户留存</MenuItem>
-                            <MenuItem name="3-5">流失用户</MenuItem>
-                        </MenuGroup>
-                    </Submenu>
-                    <MenuItem name="4">
-                        <Icon type="ios-construct"/>
-                        综合设置
-                    </MenuItem>-->
+                    <MenuItem name="1" to="/">
+                        <Icon type="md-home" size="18"/>
+                        <span>首页</span>
+                    </MenuItem>
+                    <MenuItem name="2" to="/toSubmitTopic">
+                        <Icon type="ios-create" ize="18"/>
+                        <span>发表帖子</span>
+                    </MenuItem>
                 </Menu>
                 <div class="login_register" v-if="!isLogin">
                     <div class="login">
