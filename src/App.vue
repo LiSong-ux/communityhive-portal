@@ -13,7 +13,7 @@
                         <span>首页</span>
                     </MenuItem>
                     <MenuItem name="2" to="/toSubmitTopic">
-                        <Icon type="ios-create" ize="18"/>
+                        <Icon type="ios-create" size="18"/>
                         <span>发表帖子</span>
                     </MenuItem>
                 </Menu>
