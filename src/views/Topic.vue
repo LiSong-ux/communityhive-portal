@@ -398,9 +398,9 @@
         padding: 45px 30px 30px 30px !important;
     }
 
-    .modal_reply /deep/ .ivu-modal-wrap {
+    /*.modal_reply /deep/ .ivu-modal-wrap {
         z-index: 11010 !important;
-    }
+    }*/
 
     .modal_reply_overflow {
         width: 800px;
