@@ -8,7 +8,7 @@
                 </div>
                 <div class="topic_head">
                     <div class="topic_author">{{ topic.username }}</div>
-                    <div class="topic_time">发表于 {{ topic.submittime | dateFormat }}</div>
+                    <div class="topic_time">发表于 {{ topic.submitTime | dateFormat }}</div>
                     <div class="floor">楼主</div>
                 </div>
                 <div class="topic_content" v-html="topic.content"></div>
@@ -19,14 +19,14 @@
             <div class="reply" v-for="(reply, index) in pageReplyList" :key="index">
                 <div class="reply_head">
                     <div class="reply_author">{{ reply.username }}</div>
-                    <div class="reply_time">发表于 {{ reply.submittime | dateFormat }}</div>
+                    <div class="reply_time">发表于 {{ reply.submitTime | dateFormat }}</div>
                     <div class="floor">{{ reply.floor }}楼</div>
                 </div>
                 <div class="reply_content">
                     <div class="reply_quote" v-if="reply.quote!=0">
                         <div class="quote_icon_e">
                             <div class="reply_quote_head">
-                                <span class="reply_quote_info">{{ replyList[reply.quoteIndex].username }} 发表于 {{ replyList[reply.quoteIndex].submittime | dateFormat }}</span>
+                                <span class="reply_quote_info">{{ replyList[reply.quoteIndex].username }} 发表于 {{ replyList[reply.quoteIndex].submitTime | dateFormat }}</span>
                                 <span class="reply_quote_floor">{{ replyList[reply.quoteIndex].floor }}楼</span>
                             </div>
                             <span v-html="replyList[reply.quoteIndex].content"></span>
@@ -51,7 +51,7 @@
             <div class="reply_quote" v-if="isShowQu">
                 <div class="quote_icon_e">
                     <div class="reply_quote_head">
-                        <span class="reply_quote_info">{{ toQuote.username }} 发表于 {{ toQuote.submittime | dateFormat }}</span>
+                        <span class="reply_quote_info">{{ toQuote.username }} 发表于 {{ toQuote.submitTime | dateFormat }}</span>
                         <span class="reply_quote_floor">{{ toQuote.floor }}楼</span>
                     </div>
                     <div class="modal_reply_overflow" v-html="toQuote.content"></div>

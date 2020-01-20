@@ -1,6 +1,39 @@
 <template>
     <div class="home">
-        <table class="table">
+
+
+        <!--<table class="table_notice">
+            <tr class="tr_head border_bottom">
+                <th class="th_title" align="left" colspan="2">
+                    <div class="title_box">全部公告</div>
+                </th>
+                <th align="center">作者</th>
+                <th align="center">查看</th>
+                <th align="center">最后修改</th>
+            </tr>
+            <tr class="tr_topic" v-for="(topic, index) in noticeList" :key="index">
+                <td :class="index==noticeList.length-1?'label':'label border_bottom'" align="center">
+                    【<span>{{ topic.label }}</span>】
+                </td>
+                <td :class="index==noticeList.length-1?'title':'title border_bottom'">
+                    <router-link :to="'/toTopic?id='+topic.id">{{ topic.title }}</router-link>
+                </td>
+                <td :class="index==noticeList.length-1?'author':'author border_bottom'">
+                    <h3>{{ topic.username }}</h3>
+                    <p>{{ topic.submittime | dateFormat }}</p>
+                </td>
+                <td :class="index==noticeList.length-1?'reply_view':'reply_view border_bottom'">
+                    <p>{{ topic.viewcount }}</p>
+                </td>
+                <td :class="index==noticeList.length-1?'latestReply':'latestReply border_bottom'">
+                    <h3>{{ topic.lastReply }}</h3>
+                    <p>{{ topic.lastSubmit | dateFormat }}</p>
+                </td>
+            </tr>
+        </table>-->
+
+
+        <table class="table_topic">
             <tr class="tr_head border_bottom">
                 <th class="th_title" align="left" colspan="2">
                     <div class="title_box">全部主题</div>
@@ -18,11 +51,11 @@
                 </td>
                 <td :class="index==topicList.length-1?'author':'author border_bottom'">
                     <h3>{{ topic.username }}</h3>
-                    <p>{{ topic.submittime | dateFormat }}</p>
+                    <p>{{ topic.submitTime | dateFormat }}</p>
                 </td>
                 <td :class="index==topicList.length-1?'reply_view':'reply_view border_bottom'">
-                    <h3>{{ topic.replycount }}</h3>
-                    <p>{{ topic.viewcount }}</p>
+                    <h3>{{ topic.replyCount }}</h3>
+                    <p>{{ topic.viewCount }}</p>
                 </td>
                 <td :class="index==topicList.length-1?'latestReply':'latestReply border_bottom'">
                     <h3>{{ topic.lastReply }}</h3>
@@ -42,6 +75,7 @@
         name: 'home',
         data() {
             return {
+                noticeList: [],
                 topicList: [],
                 paging: {
                     currentPage: 1,
@@ -59,7 +93,22 @@
         },
         methods: {
             init() {
+                this.getNoticeList();
                 this.getTopicList();
+            },
+            getNoticeList() {
+                let initParams = {
+                    'terminal': navigator.userAgent
+                };
+                let params = this.qs.stringify(initParams);
+                this.axios.post('/noticeList', params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.$Message.error(resp.msg);
+                        return;
+                    }
+                    this.noticeList = resp.data.noticeList;
+                });
             },
             getTopicList() {
                 let initParams = {
@@ -94,9 +143,15 @@
         overflow: hidden;
     }
 
-    .table {
+    .table_notice {
         width: 100%;
         border-collapse: collapse;
+    }
+
+    .table_topic {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 40px;
     }
 
     .tr_head {
