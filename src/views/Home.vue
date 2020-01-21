@@ -2,7 +2,7 @@
     <div class="home">
 
 
-        <!--<table class="table_notice">
+        <table class="table_notice">
             <tr class="tr_head border_bottom">
                 <th class="th_title" align="left" colspan="2">
                     <div class="title_box">全部公告</div>
@@ -11,26 +11,26 @@
                 <th align="center">查看</th>
                 <th align="center">最后修改</th>
             </tr>
-            <tr class="tr_topic" v-for="(topic, index) in noticeList" :key="index">
+            <tr class="tr_topic" v-for="(notice, index) in noticeList" :key="index">
                 <td :class="index==noticeList.length-1?'label':'label border_bottom'" align="center">
-                    【<span>{{ topic.label }}</span>】
+                    【<span>{{ notice.label }}</span>】
                 </td>
                 <td :class="index==noticeList.length-1?'title':'title border_bottom'">
-                    <router-link :to="'/toTopic?id='+topic.id">{{ topic.title }}</router-link>
+                    <router-link :to="'/toTopic?id='+notice.id">{{ notice.title }}</router-link>
                 </td>
                 <td :class="index==noticeList.length-1?'author':'author border_bottom'">
-                    <h3>{{ topic.username }}</h3>
-                    <p>{{ topic.submittime | dateFormat }}</p>
+                    <h3>{{ notice.username }}</h3>
+                    <p>{{ notice.submitTime | dateFormat }}</p>
                 </td>
                 <td :class="index==noticeList.length-1?'reply_view':'reply_view border_bottom'">
-                    <p>{{ topic.viewcount }}</p>
+                    <p>{{ notice.viewCount }}</p>
                 </td>
                 <td :class="index==noticeList.length-1?'latestReply':'latestReply border_bottom'">
-                    <h3>{{ topic.lastReply }}</h3>
-                    <p>{{ topic.lastSubmit | dateFormat }}</p>
+                    <h3>{{ notice.lastEdit }}</h3>
+                    <p>{{ notice.lastSubmitTime | dateFormat }}</p>
                 </td>
             </tr>
-        </table>-->
+        </table>
 
 
         <table class="table_topic">
@@ -107,7 +107,7 @@
                         this.$Message.error(resp.msg);
                         return;
                     }
-                    this.noticeList = resp.data.noticeList;
+                    this.noticeList = resp.data;
                 });
             },
             getTopicList() {
