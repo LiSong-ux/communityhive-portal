@@ -1,7 +1,5 @@
 <template>
     <div class="home">
-
-
         <table class="table_notice">
             <tr class="tr_head border_bottom">
                 <th class="th_title" align="left" colspan="2">
@@ -12,11 +10,11 @@
                 <th align="center">最后修改</th>
             </tr>
             <tr class="tr_topic" v-for="(notice, index) in noticeList" :key="index">
-                <td :class="index==noticeList.length-1?'label':'label border_bottom'" align="center">
+                <td :class="index==noticeList.length-1?'notice_label':'notice_label border_bottom'" align="center">
                     【<span>{{ notice.label }}</span>】
                 </td>
                 <td :class="index==noticeList.length-1?'title':'title border_bottom'">
-                    <router-link :to="'/toTopic?id='+notice.id">{{ notice.title }}</router-link>
+                    <router-link :to="'/toNotice?id='+notice.id">{{ notice.title }}</router-link>
                 </td>
                 <td :class="index==noticeList.length-1?'author':'author border_bottom'">
                     <h3>{{ notice.username }}</h3>
@@ -31,8 +29,6 @@
                 </td>
             </tr>
         </table>
-
-
         <table class="table_topic">
             <tr class="tr_head border_bottom">
                 <th class="th_title" align="left" colspan="2">
@@ -148,10 +144,15 @@
         border-collapse: collapse;
     }
 
+    .notice_label {
+        width: 8%;
+        color: red;
+    }
+
     .table_topic {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 40px;
+        margin-top: 20px;
     }
 
     .tr_head {
