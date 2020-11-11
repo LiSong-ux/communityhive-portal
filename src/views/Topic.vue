@@ -328,6 +328,9 @@
         color: #515a6e;
     }
 
+    .reply_content /deep/ img {
+        max-width: 100%;
+    }
 
     .reply_quote {
         width: 100%;
