@@ -63,7 +63,8 @@ export default {
     ];
     this.editor.customConfig.onchange = (html) => {
       //执行xss过滤
-      this.editorContent = xss(html);
+      // this.editorContent = xss(html);
+      this.editorContent = html;
     };
     this.editor.customConfig.zIndex = 1000;
     this.editor.customConfig.showLinkImg = false;
