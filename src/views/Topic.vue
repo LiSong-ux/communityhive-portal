@@ -103,7 +103,7 @@
                 let params = this.qs.stringify(initParams);
                 this.axios.post('/topic', params).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.$Message.error(resp.msg);
                         this.$router.push('/');
                         return;
@@ -111,27 +111,27 @@
                     this.topic = resp.data.topic;
                     this.pageReplyList = resp.data.replyList;
                     for (let i = 0; i < this.pageReplyList.length; i++) {
-                        if (this.pageReplyList[i].quote != 0) {
+                        if (this.pageReplyList[i].quote !== 0) {
                             this.pageReplyList[i].quoteIndex = this.pageReplyList[i].quote - 1;
                         }
                     }
                     let lastIndex_f = this.replyList.length - 1;
-                    if (this.replyList.length == 0 || this.replyList[lastIndex_f].floor < resp.data.replyList[0].floor) {
+                    if (this.replyList.length === 0 || this.replyList[lastIndex_f].floor < resp.data.replyList[0].floor) {
                         for (let i = 0; i < resp.data.replyList.length; i++) {
                             this.replyList.push(resp.data.replyList[i]);
                         }
                     }
                     let lastIndex_s = this.replyList.length - 1;
                     let respLastIndex = resp.data.replyList.length - 1;
-                    if (this.replyList.length != 0 && this.replyList[lastIndex_s].floor >= resp.data.replyList[0].floor && this.replyList[lastIndex_s].floor < resp.data.replyList[respLastIndex].floor) {
+                    if (this.replyList.length !== 0 && this.replyList[lastIndex_s].floor >= resp.data.replyList[0].floor && this.replyList[lastIndex_s].floor < resp.data.replyList[respLastIndex].floor) {
                         for (let i = 0; i < resp.data.replyList.length; i++) {
                             if (this.replyList[lastIndex_s].floor < resp.data.replyList[i].floor) {
                                 this.replyList.push(resp.data.replyList[i]);
                             }
                         }
-                    } else if (this.replyList.length != 0 && this.replyList[0].floor < resp.data.replyList[0].floor && this.replyList[lastIndex_s].floor > resp.data.replyList[respLastIndex].floor) {
+                    } else if (this.replyList.length !== 0 && this.replyList[0].floor < resp.data.replyList[0].floor && this.replyList[lastIndex_s].floor > resp.data.replyList[respLastIndex].floor) {
                         for (let i = 0; i < this.replyList.length; i++) {
-                            if (this.replyList[i].floor == resp.data.replyList[0].floor) {
+                            if (this.replyList[i].floor === resp.data.replyList[0].floor) {
                                 break;
                             } else if (this.replyList[i].floor > resp.data.replyList[0].floor) {
                                 for (let j = 0; j < resp.data.replyList.length; j++) {
@@ -146,7 +146,7 @@
                 });
             },
             submitReply(num) {
-                if (num == 0) {
+                if (num === 0) {
                     this.quoteFloor = 0;
                     this.$refs.editor.getContent();
                 } else {
@@ -158,7 +158,7 @@
                 let validateC = validateB.replace(/<\/p>/g, '');
                 let validateD = validateC.replace(/&nbsp;/g, '');
                 let validateE = validateD.replace(/<br>/g, '');
-                if (validateE.length == 0) {
+                if (validateE.length === 0) {
                     this.$Message.error('请输入内容！');
                     return;
                 }
@@ -169,7 +169,7 @@
                 let params = this.qs.stringify(this.newReply);
                 this.axios.post('/submitReply', params).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.instance('error', resp.msg);
                         return;
                     }
@@ -181,7 +181,7 @@
                 })
             },
             showModal(floor) {
-                if (floor == 0) {
+                if (floor === 0) {
                     this.isShowQu = false;
                 } else {
                     this.isShowQu = true;
